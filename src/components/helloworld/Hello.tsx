@@ -1,4 +1,5 @@
 import * as React from "react";
+import './hello.scss';
 
 export interface HelloProps {
     name: string
@@ -10,8 +11,8 @@ export class Hello extends React.Component<HelloProps, {}> {
     render() {
         return (
             <div>
-                <h1>Hello {this.props.name}!</h1>
-                <h1>Hello {this.props.name}!</h1>
+                <h1 className="hello-header">Hello {this.props.name}!</h1>
+                <h1 className="hello-header">Hello {this.props.name}!</h1>
             </div>
         );
     }
