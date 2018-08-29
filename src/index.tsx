@@ -8,14 +8,15 @@ ReactDOM.render(
     document.getElementById("dom-entry")
 );
 
-interface User {
-    readonly id: number,
-    name: string,
+const a = document.getElementById("dom-entry");
+if (a) {
+    a.appendChild(a);
 }
 
-const user: User = {
-    id: 5,
-    name: 'ddd',
-};
+enum Protocols {
+    HTTP,
+    HTTPS,
+    FTP
+}
 
-user.name += "dddd";
+type HyperTextProtocol = Protocols.HTTP | Protocols.HTTPS;
