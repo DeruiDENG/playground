@@ -1,25 +1,27 @@
-interface Address {
-    country: string,
-    city: string,
-    street: string,
-    ZIP: number,
-}
+// Instead of :
+// const getName = (objWithName: { name: string }): string => {
+//     return objWithName.name;
+// };
 
-interface People {
-    readonly name: string,
-    address?: Address
-}
-
-type PeopleB = {
+// We can write:
+interface ObjWithName {
     name: string,
-    address?: Address
 }
 
-const createPeople = (name: string): People => {
-    return {
-        name
-    };
+const getName = (objWithName: ObjWithName): string => {
+    return objWithName.name;
 };
 
-const user = createPeople('Alice');
-console.log(user.name);
+const aObjectWithName = {
+    name: 'David',
+    gender: 'male'
+};
+
+const aObjectWithoutName = {
+    count: 5,
+};
+
+getName(aObjectWithName);
+// getName(aObjectWithoutName); // compile time error
+
+
