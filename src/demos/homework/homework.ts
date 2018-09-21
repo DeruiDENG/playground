@@ -1,4 +1,4 @@
-import {promptInput, parseDimensionInput} from "./inputHandlers";
+import {promptInput, parseDimensionInput, parseConnectivityInput} from "./inputHandlers";
 import Maze from "./Maze";
 
 const main = async () => {
@@ -9,9 +9,17 @@ const main = async () => {
         return;
     }
 
-    console.log(`Dimension: ${dimension.dimX},${dimension.dimY}`);
     const maze = new Maze(dimension.dimX, dimension.dimY);
     maze.print();
+
+    const connectivityInput = await promptInput('Please input the connectivity(0,1 0,2;1,1 1,2): ');
+    const connectivity = parseConnectivityInput(connectivityInput);
+    if (connectivity === false) {
+        console.log('Connectivity is invalid');
+        return;
+    }
+
+    console.log(connectivity);
 };
 
 main();
