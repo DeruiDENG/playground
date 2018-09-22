@@ -14,7 +14,7 @@ export interface ConnectivityInfo {
 }
 
 class Maze {
-  private dimension: Dimension;
+  private readonly dimension: Dimension;
   private readonly blocks: BlockType[][];
 
   constructor(dimX: number, dimY: number) {
@@ -58,18 +58,8 @@ class Maze {
     return true;
   }
 
-  private canConnect(connectivityInfoItem: ConnectivityInfo): boolean {
-    const startX = connectivityInfoItem.start.x;
-    const endX = connectivityInfoItem.end.x;
-    const startY = connectivityInfoItem.start.y;
-    const endY = connectivityInfoItem.end.y;
-    const isStartEndConnected =
-      Math.abs(startX - endX) +
-      Math.abs(startY - endY) === 1;
-    const isWithinRange = [startX, endX].every(x => x >= 0 && x < this.dimension.x) &&
-      [startY, endY].every(y => y >= 0 && y < this.dimension.y);
+  public putRobit(dimension: Dimension) {
 
-    return isStartEndConnected && isWithinRange;
   }
 
   public print() {
@@ -83,6 +73,20 @@ class Maze {
 
       console.log(output);
     }
+  }
+
+  private canConnect(connectivityInfoItem: ConnectivityInfo): boolean {
+    const startX = connectivityInfoItem.start.x;
+    const endX = connectivityInfoItem.end.x;
+    const startY = connectivityInfoItem.start.y;
+    const endY = connectivityInfoItem.end.y;
+    const isStartEndConnected =
+      Math.abs(startX - endX) +
+      Math.abs(startY - endY) === 1;
+    const isWithinRange = [startX, endX].every(x => x >= 0 && x < this.dimension.x) &&
+      [startY, endY].every(y => y >= 0 && y < this.dimension.y);
+
+    return isStartEndConnected && isWithinRange;
   }
 }
 

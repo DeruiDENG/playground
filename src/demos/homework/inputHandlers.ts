@@ -35,7 +35,7 @@ export const parseDimensionInput = (dimensionInput: string): Dimension | false =
   return false;
 };
 
-export const parseConnectivityInput = (connectivityInput: string) => {
+export const parseConnectivityInput = (connectivityInput: string): false | ConnectivityInfo[] => {
   const connectivityItems = connectivityInput.split(';');
   if (connectivityItems.length === 0) {
     return false;
