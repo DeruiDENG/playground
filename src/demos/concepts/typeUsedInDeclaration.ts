@@ -18,7 +18,8 @@ const cList = [1, 2, 3];
 
 // Enum
 enum Gender {
-  Male, Female
+  Male,
+  Female,
 }
 
 const person = {

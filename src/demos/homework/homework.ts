@@ -9,7 +9,7 @@ const main = async () => {
     return;
   }
 
-  const maze = new Maze(dimension.dimX, dimension.dimY);
+  const maze = new Maze(dimension.x, dimension.y);
   maze.print();
 
   const connectivityInput = await promptInput('Please input the connectivity(0,1 0,2;1,1 1,2): ');
@@ -19,7 +19,13 @@ const main = async () => {
     return;
   }
 
-  console.log(connectivity);
+  const isAddConnectivitySuccess = maze.addConnectivityInfo(connectivity);
+  if (!isAddConnectivitySuccess) {
+    console.log('Connectivity format does not fit into maze');
+    return;
+  }
+
+  maze.print();
 };
 
 main();

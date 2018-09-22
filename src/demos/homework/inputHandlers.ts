@@ -1,14 +1,5 @@
 import * as readline from 'readline';
-
-interface Dimension {
-  dimX: number;
-  dimY: number;
-}
-
-interface ConnectivityInfo {
-  start: Dimension;
-  end: Dimension;
-}
+import { ConnectivityInfo, Dimension } from './Maze';
 
 export const promptInput = (promptMessage: string) => {
   const rl = readline.createInterface({
@@ -36,8 +27,8 @@ export const parseDimensionInput = (dimensionInput: string): Dimension | false =
   const dimX = Number(splitInput[1]);
   if (dimX > 0 && dimY > 0) {
     return {
-      dimX,
-      dimY,
+      x: dimX,
+      y: dimY,
     };
   }
 
@@ -64,13 +55,13 @@ export const parseConnectivityInput = (connectivityInput: string) => {
     }
 
     const start = {
-      dimY: Number(startDims[0]),
-      dimX: Number(startDims[1]),
+      y: Number(startDims[0]),
+      x: Number(startDims[1]),
     };
 
     const end = {
-      dimY: Number(endDims[0]),
-      dimX: Number(endDims[1]),
+      y: Number(endDims[0]),
+      x: Number(endDims[1]),
     };
 
     result.push({ start, end });

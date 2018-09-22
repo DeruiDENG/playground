@@ -1,4 +1,4 @@
-type Dimension = {
+export type Dimension = {
   x: number,
   y: number,
 };
@@ -8,14 +8,14 @@ enum BlockType {
   Street,
 }
 
-interface ConnectivityInfo {
+export interface ConnectivityInfo {
   start: Dimension;
   end: Dimension;
 }
 
 class Maze {
   private dimension: Dimension;
-  private blocks: BlockType[][];
+  private readonly blocks: BlockType[][];
 
   constructor(dimX: number, dimY: number) {
     this.blocks = Maze.initializeBlock(dimX, dimY);
@@ -44,10 +44,12 @@ class Maze {
     return blocks;
   }
 
-  public addConectivityInfo(connectivityInfoItems: ConnectivityInfo[]): boolean {
+  public addConnectivityInfo(connectivityInfoItems: ConnectivityInfo[]): boolean {
     for (const connectivityInfoItem of connectivityInfoItems) {
       if (this.canConnect(connectivityInfoItem)) {
-
+        const dimensionToUpdateX = connectivityInfoItem.start.x + connectivityInfoItem.end.x + 1;
+        const dimensionToUpdateY = connectivityInfoItem.start.y + connectivityInfoItem.end.y + 1;
+        this.blocks[dimensionToUpdateY][dimensionToUpdateX] = BlockType.Street;
       } else {
         return false;
       }
