@@ -1,0 +1,7 @@
+{
+  "extends": "tslint-config-airbnb",
+  "rules": {
+    "no-increment-decrement": false,
+    "no-trailing-whitespace": [true, "ignore-comments", "ignore-blank-lines"]
+  }
+}

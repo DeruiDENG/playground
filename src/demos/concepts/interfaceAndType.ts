@@ -5,20 +5,20 @@
 
 // We can write:
 interface ObjWithName {
-    name: string,
+  name: string,
 }
 
 const getName = (objWithName: ObjWithName): string => {
-    return objWithName.name;
+  return objWithName.name;
 };
 
 const aObjectWithName = {
-    name: 'David',
-    gender: 'male'
+  name: 'David',
+  gender: 'male',
 };
 
 const aObjectWithoutName = {
-    count: 5,
+  count: 5,
 };
 
 getName(aObjectWithName);

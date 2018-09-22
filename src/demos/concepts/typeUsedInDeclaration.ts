@@ -18,17 +18,14 @@ const cList = [1, 2, 3];
 
 // Enum
 enum Gender {
-    Male, Female
+  Male, Female
 }
 
 const person = {
-    name: 'Derui',
-    gender: Gender.Male
+  name: 'Derui',
+  gender: Gender.Male,
 };
 
 // Any
 let aVariable: any = 5;
 aVariable = 'string';
-
-
-

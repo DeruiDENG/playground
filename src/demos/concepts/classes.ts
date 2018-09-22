@@ -1,13 +1,13 @@
 class Animal {
-    private name: string;
+  private name: string;
 
-    constructor(theName: string) {
-        this.name = theName;
-    }
+  constructor(theName: string) {
+    this.name = theName;
+  }
 
-    changeName(newName: string) {
-        this.name = newName;
-    }
+  changeName(newName: string) {
+    this.name = newName;
+  }
 }
 
 
