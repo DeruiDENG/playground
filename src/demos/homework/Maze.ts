@@ -161,7 +161,7 @@ class Maze {
   }
 
   private updateRobotPosition(position: Dimension) {
-
+    this.robotPosition = { x: position.x, y: position.y };
   }
 }
 

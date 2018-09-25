@@ -32,16 +32,29 @@ const main = async () => {
 
   maze.print();
 
-  const robotInput = await promptInput('Please input robot info:(0,1)');
+  const robotInput = await promptInput('Please input robot info:(0,1 D1S2)');
   const robotInfo = parseRobotInput(robotInput);
   if (robotInfo === false) {
     console.log('Failed to parse robot input.');
     return;
   }
 
-  const isPutRobotSuccess = maze.putRobot(robotInfo);
+  const isPutRobotSuccess = maze.putRobot(robotInfo.dimension);
   if (!isPutRobotSuccess) {
     console.log('The position of robot to the maze is incorrect.');
+    return;
+  }
+
+  for (const robotCommand of robotInfo.commands) {
+    const isProcessRobotMoveSuccess = maze.moveRobot({
+      direction: robotCommand.direction,
+      repeatCount: robotCommand.repeatCount,
+    });
+
+    if (!isProcessRobotMoveSuccess) {
+      console.log('Robot command format error(should be in format D1S2W3)');
+      return;
+    }
   }
 
   maze.print();
