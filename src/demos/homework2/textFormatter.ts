@@ -9,29 +9,28 @@ const parseSegments = (text: string): string[] => {
   let spaceCounter = 0;
 
   for (const rawSegment of rawSegments) {
-    if (rawSegment !== ' ') {
+    if (rawSegment !== '') {
       if (spaceCounter !== 0) {
         resultSegments.push(' '.repeat(spaceCounter));
         spaceCounter = 0;
       }
 
       resultSegments.push(rawSegment);
-    } else {
-      spaceCounter += 1;
     }
+
+    spaceCounter += 1;
   }
 
-  if (spaceCounter !== 0) {
-    resultSegments.push(' '.repeat(spaceCounter));
+  if (spaceCounter > 1) {
+    resultSegments.push(' '.repeat(spaceCounter - 1));
   }
 
   return resultSegments;
 };
 
 const range = (start: number, end: number): number[] => {
-  console.log(`${start} ${end}`);
   const result: number[] = [];
-  for (let i = start; i < end; i++) {
+  for (let i = start; i <= end; i++) {
     result.push(i);
   }
 
