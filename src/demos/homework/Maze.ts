@@ -6,7 +6,7 @@ enum BlockType {
   Wall, Street,
 }
 
-export type RobotCommand = {
+type RobotCommand = {
   direction: 'W' | 'A' | 'S' | 'D',
   repeatCount: number,
 };
@@ -82,6 +82,19 @@ class Maze {
     return true;
   }
 
+  public moveRobot(robotCommand: RobotCommand): boolean {
+    if (!this.isRobotInitialized()) {
+      return false;
+    }
+
+    const { direction } = robotCommand;
+    for (let i = 0; i < robotCommand.repeatCount; i++) {
+      this.moveRobotByOneStep(direction);
+    }
+
+    return true;
+  }
+
   public print() {
     console.log('####Maze####');
     for (const [indexY, blockRow] of Array.from(this.blocks.entries())) {
@@ -100,6 +113,40 @@ class Maze {
     }
   }
 
+  private isRobotInitialized(): boolean {
+    return Boolean(this.robotPosition);
+  }
+
+  private moveRobotByOneStep(direction: 'W' | 'A' | 'S' | 'D') {
+    if (!this.robotPosition) {
+      return;
+    }
+
+    let { x: robotPositionX, y: robotPositionY } = this.robotPosition;
+    switch (direction) {
+      case 'W': {
+        robotPositionY -= 1;
+        break;
+      }
+      case 'A': {
+        robotPositionX -= 1;
+        break;
+      }
+      case 'S': {
+        robotPositionY += 1;
+        break;
+      }
+      case 'D': {
+        robotPositionX += 1;
+        break;
+      }
+    }
+
+    if (this.blocks[robotPositionY][robotPositionX] === BlockType.Street) {
+      this.updateRobotPosition({ x: robotPositionX, y: robotPositionY });
+    }
+  }
+
   private canConnect(connectivityInfoItem: ConnectivityInfo): boolean {
     const startX = connectivityInfoItem.start.x;
     const endX = connectivityInfoItem.end.x;
@@ -111,6 +158,10 @@ class Maze {
       y => y >= 0 && y < this.dimension.y);
 
     return isStartEndConnected && isWithinRange;
+  }
+
+  private updateRobotPosition(position: Dimension) {
+
   }
 }
 

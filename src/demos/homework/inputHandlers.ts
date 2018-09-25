@@ -1,6 +1,11 @@
 import * as readline from 'readline';
 import { ConnectivityInfo, Dimension } from './Maze';
 
+type RobotCommand = {
+  direction: 'W' | 'A' | 'S' | 'D';
+  repeatCount: number;
+};
+
 export const promptInput = (promptMessage: string) => {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -71,20 +76,78 @@ export const parseConnectivityInput = (connectivityInput: string): false | Conne
   return result;
 };
 
-export const parseRobotInput = (robotInput: string): Dimension | false => {
-  const splitInput = robotInput.split(',');
+const parseRobotPosition = (posInput: string): Dimension | false => {
+  const splitInput = posInput.split(',');
   if (splitInput.length !== 2) {
     return false;
   }
 
   const dimY = Number.parseInt(splitInput[0], 10);
   const dimX = Number.parseInt(splitInput[1], 10);
-  if (Number.isInteger(dimY) && Number.isInteger(dimX)) {
-    return {
-      x: dimX,
-      y: dimY,
-    };
+  if (!(Number.isInteger(dimX) && Number.isInteger(dimY))) {
+    return false;
+  }
+
+  return {
+    x: dimX,
+    y: dimY,
+  };
+};
+
+const isDirectionValid =
+  (direction: string): direction is 'W' | 'A' | 'S' | 'D' =>
+    (direction === 'W' || direction === 'A' || direction === 'S' || direction === 'D');
+
+const parseCount = (count: string): number | false => {
+  const parsedCount = Number.parseInt(count, 10);
+  if (Number.isInteger(parsedCount) && parsedCount >= 0) {
+    return parsedCount;
   }
 
   return false;
 };
+
+const parseRobotCommands = (commandInput: string): RobotCommand[] | false => {
+  if (commandInput.length % 2 === 1) {
+    return false;
+  }
+
+  const commands: RobotCommand[] = [];
+
+  for (let i = 0; i < commandInput.length; i = i + 2) {
+    const direction = commandInput[i];
+    const count = commandInput[i + 1];
+    const parsedCount = parseCount(count);
+    if (isDirectionValid(direction) && parsedCount !== false) {
+      commands.push({ direction, repeatCount: parsedCount });
+    } else {
+      return false;
+    }
+
+  }
+
+  return commands;
+};
+
+export const parseRobotInput =
+  (robotInput: string): { dimension: Dimension, commands: RobotCommand[] } | false => {
+    const posAndCommand = robotInput.split(' ');
+    if (posAndCommand.length !== 2) {
+      return false;
+    }
+
+    const robotPosition = parseRobotPosition(posAndCommand[0]);
+    if (robotPosition === false) {
+      return false;
+    }
+
+    const robotCommands = parseRobotCommands(posAndCommand[1]);
+    if (robotCommands === false) {
+      return false;
+    }
+
+    return {
+      dimension: robotPosition,
+      commands: robotCommands,
+    };
+  };
