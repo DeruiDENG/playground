@@ -1,4 +1,9 @@
-import { promptInput, parseDimensionInput, parseConnectivityInput } from './inputHandlers';
+import {
+  promptInput,
+  parseDimensionInput,
+  parseConnectivityInput,
+  parseRobotInput,
+} from './inputHandlers';
 import Maze from './Maze';
 
 const main = async () => {
@@ -23,6 +28,20 @@ const main = async () => {
   if (!isAddConnectivitySuccess) {
     console.log('Connectivity format does not fit into maze');
     return;
+  }
+
+  maze.print();
+
+  const robotInput = await promptInput('Please input robot info:(0,1)');
+  const robotInfo = parseRobotInput(robotInput);
+  if (robotInfo === false) {
+    console.log('Failed to parse robot input.');
+    return;
+  }
+
+  const isPutRobotSuccess = maze.putRobot(robotInfo);
+  if (!isPutRobotSuccess) {
+    console.log('The position of robot to the maze is incorrect.');
   }
 
   maze.print();

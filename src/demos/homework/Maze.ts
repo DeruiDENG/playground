@@ -1,12 +1,15 @@
 export type Dimension = {
-  x: number,
-  y: number,
+  x: number, y: number,
 };
 
 enum BlockType {
-  Wall,
-  Street,
+  Wall, Street,
 }
+
+export type RobotCommand = {
+  direction: 'W' | 'A' | 'S' | 'D',
+  repeatCount: number,
+};
 
 export interface ConnectivityInfo {
   start: Dimension;
@@ -16,13 +19,14 @@ export interface ConnectivityInfo {
 class Maze {
   private readonly dimension: Dimension;
   private readonly blocks: BlockType[][];
+  private robotPosition: Dimension | null;
 
   constructor(dimX: number, dimY: number) {
     this.blocks = Maze.initializeBlock(dimX, dimY);
     this.dimension = {
-      x: dimX,
-      y: dimY,
+      x: dimX, y: dimY,
     };
+    this.robotPosition = null;
   }
 
   private static initializeBlock(dimX: number, dimY: number) {
@@ -58,16 +62,37 @@ class Maze {
     return true;
   }
 
-  public putRobit(dimension: Dimension) {
+  public putRobot(dimension: Dimension): boolean {
+    if (dimension.x < 0 || dimension.y < 0 || dimension.x >= this.dimension.x ||
+      dimension.y >= this.dimension.y) {
+      return false;
+    }
 
+    const dimX = dimension.x * 2 + 1;
+    const dimY = dimension.y * 2 + 1;
+    if (this.blocks[dimY][dimX] !== BlockType.Street) {
+      return false;
+    }
+
+    this.robotPosition = {
+      x: dimX,
+      y: dimY,
+    };
+
+    return true;
   }
 
   public print() {
     console.log('####Maze####');
-    for (const blockRow of this.blocks) {
+    for (const [indexY, blockRow] of Array.from(this.blocks.entries())) {
       let output = '';
-      for (const blockItem of blockRow) {
-        output += (blockItem === BlockType.Wall ? '[W]' : '[S]');
+      for (const [indexX, blockItem] of Array.from(blockRow.entries())) {
+        if (this.robotPosition && this.robotPosition.x === indexX && this.robotPosition.y ===
+          indexY) {
+          output += '[*]';
+        } else {
+          output += (blockItem === BlockType.Wall ? '[W]' : '[R]');
+        }
         output += ' ';
       }
 
@@ -80,11 +105,10 @@ class Maze {
     const endX = connectivityInfoItem.end.x;
     const startY = connectivityInfoItem.start.y;
     const endY = connectivityInfoItem.end.y;
-    const isStartEndConnected =
-      Math.abs(startX - endX) +
-      Math.abs(startY - endY) === 1;
-    const isWithinRange = [startX, endX].every(x => x >= 0 && x < this.dimension.x) &&
-      [startY, endY].every(y => y >= 0 && y < this.dimension.y);
+    const isStartEndConnected = Math.abs(startX - endX) + Math.abs(startY - endY) === 1;
+    const isWithinRange = [startX, endX].every(
+      x => x >= 0 && x < this.dimension.x) && [startY, endY].every(
+      y => y >= 0 && y < this.dimension.y);
 
     return isStartEndConnected && isWithinRange;
   }

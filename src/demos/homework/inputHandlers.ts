@@ -18,13 +18,13 @@ export const promptInput = (promptMessage: string) => {
 };
 
 export const parseDimensionInput = (dimensionInput: string): Dimension | false => {
-  const splitInput = dimensionInput.split(',');
+  const splitInput = dimensionInput.split(' ');
   if (splitInput.length !== 2) {
     return false;
   }
 
-  const dimY = Number(splitInput[0]);
-  const dimX = Number(splitInput[1]);
+  const dimY = Number.parseInt(splitInput[0], 10);
+  const dimX = Number.parseInt(splitInput[1], 10);
   if (dimX > 0 && dimY > 0) {
     return {
       x: dimX,
@@ -50,22 +50,41 @@ export const parseConnectivityInput = (connectivityInput: string): false | Conne
     const startDims = startAndEnd[0].split(',');
     const endDims = startAndEnd[1].split(',');
     if (startDims.length !== 2 || endDims.length !== 2 || startDims.some(
-      x => !Number.isInteger(Number(x))) || endDims.some(x => !Number.isInteger(Number(x)))) {
+      x => !Number.isInteger(Number.parseInt(x, 10))) ||
+      endDims.some(x => !Number.isInteger(Number.parseInt(x, 10)))) {
       return false;
     }
 
     const start = {
-      y: Number(startDims[0]),
-      x: Number(startDims[1]),
+      y: Number.parseInt(startDims[0], 10),
+      x: Number.parseInt(startDims[1], 10),
     };
 
     const end = {
-      y: Number(endDims[0]),
-      x: Number(endDims[1]),
+      y: Number.parseInt(endDims[0], 10),
+      x: Number.parseInt(endDims[1], 10),
     };
 
     result.push({ start, end });
   }
 
   return result;
+};
+
+export const parseRobotInput = (robotInput: string): Dimension | false => {
+  const splitInput = robotInput.split(',');
+  if (splitInput.length !== 2) {
+    return false;
+  }
+
+  const dimY = Number.parseInt(splitInput[0], 10);
+  const dimX = Number.parseInt(splitInput[1], 10);
+  if (Number.isInteger(dimY) && Number.isInteger(dimX)) {
+    return {
+      x: dimX,
+      y: dimY,
+    };
+  }
+
+  return false;
 };
