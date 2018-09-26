@@ -32,6 +32,7 @@
       <option name="WRAP_ON_TYPING" value="0" />
     </codeStyleSettings>
     <codeStyleSettings language="TypeScript">
+      <option name="RIGHT_MARGIN" value="100" />
       <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
       <option name="CALL_PARAMETERS_WRAP" value="5" />
       <option name="CALL_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
@@ -41,6 +42,7 @@
       <option name="TERNARY_OPERATION_WRAP" value="5" />
       <option name="IF_BRACE_FORCE" value="3" />
       <option name="WRAP_ON_TYPING" value="0" />
+      <option name="SOFT_MARGINS" value="100" />
       <indentOptions>
         <option name="INDENT_SIZE" value="2" />
         <option name="CONTINUATION_INDENT_SIZE" value="2" />
