@@ -1,0 +1,8 @@
+## Build target
+dist/
+
+## NPM
+node_modules/
+
+## JetBrains Related
+.idea/workspace.xml

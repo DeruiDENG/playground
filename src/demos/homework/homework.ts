@@ -6,7 +6,7 @@ import {
 } from './inputHandlers';
 import Maze from './Maze';
 
-const main = async () => {
+export const main = async () => {
   const dimensionInput = await promptInput('Please input the dimension(3 3): ');
   const dimension = parseDimensionInput(dimensionInput);
   if (dimension === false) {
@@ -59,5 +59,3 @@ const main = async () => {
 
   maze.print();
 };
-
-main();
