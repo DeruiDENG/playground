@@ -1,7 +1,7 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/demos/demo.ts',
+    entry: './src/codewar/index.ts',
     output: {
         filename: 'app.js',
         path: __dirname + '/dist',
