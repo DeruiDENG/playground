@@ -10,6 +10,5 @@ class Animal {
   }
 }
 
-
 const dog = new Animal('dog');
 dog.changeName('sss');
