@@ -1,7 +1,4 @@
-language: nodejs
-
-install:
-  - npm i -g yarn
-  - yarn
-script:
-  - yarn test
+language: node_js
+node_js:
+  - "iojs"
+  - "7"
