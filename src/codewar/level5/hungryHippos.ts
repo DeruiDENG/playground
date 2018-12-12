@@ -8,10 +8,10 @@ game = new Game(board);
 assert.equal(game.play(), 2, "Should return '2'");
 
 board = [[1,0,1,0,1],
-  [1,0,1,0,1],
-  [1,1,1,0,0],
-  [0,0,0,1,1],
-  [0,0,0,1,1]];
+         [1,0,1,0,1],
+         [1,1,1,0,0],
+         [0,0,0,1,1],
+         [0,0,0,1,1]];
 game = new Game(board);
 assert.equal(game.play(), 3, "Should return '3'");
 */
@@ -23,18 +23,50 @@ export class Game {
     this.board = board;
   }
 
-  play(): number {
-    let heapCounter = 0;
+  findFood(): { row: number, column: number } | false {
     for (let row = 0; row < this.board.length; row++) {
-      const boardRow = this.board[row];
-      for (let column = 0; column < boardRow.length; column++) {
-        const currentElement = boardRow[column];
-        if (currentElement === 1 && (row === 0 || this.board[row - 1][column] === 0) && (column === 0 || this.board[row][column - 1] === 0)) {
-          heapCounter++;
+      for (let column = 0; column < this.board[0].length; column++) {
+        if (this.board[row][column] === 1) {
+          return { row, column };
         }
       }
     }
 
-    return heapCounter;
+    return false;
+  }
+
+  labelFood({ row, column }: { row: number, column: number }) {
+    const { numRow, numColumn } = this.getFoodSize();
+    if (row >= numRow || row < 0 || column >= numColumn || column < 0 || this.board[row][column] !== 1) {
+      return;
+    }
+
+    this.board[row][column] = 2;
+    this.labelFood({ row: row - 1, column });
+    this.labelFood({ row: row + 1, column });
+    this.labelFood({ row: row, column: column - 1 });
+    this.labelFood({ row, column: column + 1 });
+  }
+
+  getFoodSize(): { numRow: number, numColumn: number } {
+    return {
+      numRow: this.board.length,
+      numColumn: this.board[0].length,
+    }
+  }
+
+  play(): number {
+    let counter = 0;
+    while (true) {
+      const foodPosition = this.findFood();
+      if (foodPosition === false) {
+        break;
+      }
+
+      this.labelFood(foodPosition);
+      counter++;
+    }
+
+    return counter;
   }
 }
