@@ -16,5 +16,6 @@ What is considered Valid ?
 
 export class Challenge {
   static validBraces(braces: string): boolean {
+    let counter = 0;
   }
 }
