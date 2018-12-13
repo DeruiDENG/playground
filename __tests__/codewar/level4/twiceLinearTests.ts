@@ -6,4 +6,8 @@ describe('twiceLinear should work', function () {
     expect(G964.dblLinear(20)).toBe(57);
     expect(G964.dblLinear(30)).toBe(91);
   });
+
+  it('should pass large integer test', function () {
+    expect(G964.dblLinear(60000)).toBe(1511311);
+  });
 });
