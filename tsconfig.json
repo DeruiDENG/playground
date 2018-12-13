@@ -5,7 +5,7 @@
     "strictNullChecks": false,
     "module": "commonjs",
     "target": "es5",
-    "lib": ["es5", "es6", "dom"],
+    "lib": ["es5", "es7", "dom"],
     "jsx": "react"
   },
   "include": [
