@@ -5,6 +5,7 @@
   "author": "DeruiDeng",
   "license": "MIT",
   "dependencies": {
+    "@types/chai": "^4.1.7",
     "@types/react": "^16.4.9",
     "@types/react-dom": "^16.0.7",
     "@types/react-router-dom": "^4.3.0",

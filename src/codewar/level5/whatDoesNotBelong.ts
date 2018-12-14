@@ -6,7 +6,7 @@
 type Element = number | string | boolean;
 
 
-export function findTheNotFittingElement(series: Element[]): any {
+export function findTheNotFittingElement(series: Element[]): Element {
   let result: Element;
   if (isSeriesAllNumber(series)) {
     result = findUniqFromNumbers(series);
@@ -34,6 +34,18 @@ function isSeriesAllNumber(series: Element[]): series is number[] {
 }
 
 function findUniqFromNumbers(series: number[]): number {
+  const [oddCount, doubleCount] = [
+    count(series, ele => ele % 2 === 1),
+    count(series, ele => ele % 2 === 0)];
+
+  if (oddCount === 1) {
+    return series.find(ele => ele % 2 === 1);
+  }
+
+  if (doubleCount === 1) {
+    return series.find(ele => ele % 2 === 0);
+  }
+
   const [positiveCount, negativeCount] = [
     count(series, ele => ele > 0),
     count(series, ele => ele < 0)];
