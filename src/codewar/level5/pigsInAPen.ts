@@ -24,7 +24,7 @@ export class Game {
     }
   }
 
-  getSquare(squareIndex): Square {
+  getSquare(squareIndex: number): Square {
     const [squareColumn, squareRow] = [(squareIndex - squareIndex % this.dimension) / this.dimension, squareIndex % this.dimension];
     const firstLine = squareRow * (this.dimension * 2 + 1) + squareColumn + 1;
     return [firstLine, firstLine + this.dimension, firstLine + this.dimension + 1, firstLine + this.dimension * 2 + 1];
@@ -34,11 +34,11 @@ export class Game {
     return square.filter(edge => !this.connectedEdge.some(connectEdge => connectEdge === edge));
   }
 
-  isSquareAvailable(square): boolean {
+  isSquareAvailable(square: Square): boolean {
     return this.getSquareMissingEdges(square).length === 1;
   }
 
-  fillMissingEdges(square) {
+  fillMissingEdges(square: Square) {
     this.connectedEdge.push(...this.getSquareMissingEdges(square));
   }
 

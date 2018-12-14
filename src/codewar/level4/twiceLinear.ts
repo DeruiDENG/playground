@@ -32,7 +32,7 @@ const mergeSortedArray = (sortedArray1: number[], sortedArray2: number[]): numbe
 };
 
 export class G964 {
-  public static dblLinear(n) {
+  public static dblLinear(n: number) {
     const sequenceOne: number[] = [1, 3];
     const sequenceTwo: number[] = [4];
     let pointerOne = 1;
