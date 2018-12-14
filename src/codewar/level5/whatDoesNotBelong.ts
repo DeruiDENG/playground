@@ -11,7 +11,7 @@ export function findTheNotFittingElement(series: Element[]): Element {
   } else if (isSeriesAllString(series)) {
     result = findUniqFromStrings(series);
   } else if (isSeriesAllBoolean(series)) {
-    result = findUniqFromBooleans(series);
+    result = findUniqElementBy(series, ele => ele === true);
   } else {
     result = findUniqElement(series);
   }
@@ -32,81 +32,34 @@ function isSeriesAllNumber(series: Element[]): series is number[] {
 }
 
 function findUniqFromNumbers(series: number[]): number {
-  const results = [
+  return [
     findUniqElementBy(series, ele => ele % 2 === 1),
     findUniqElementBy(series, ele => ele > 0),
-  ];
-
-  const uniqElement = results.find(result => result !== undefined);
-  if (uniqElement !== undefined) {
-    return uniqElement;
-  }
-
-  const firstElementCount = count(series, ele => ele === series[0]);
-  if (firstElementCount === 1) {
-    return series[0];
-  } else {
-    return series.find(ele => ele !== series[0]);
-  }
+    findUniqElementBy(series, ele => series.filter(el => el === ele).length === 1, false),
+  ].find(result => result !== undefined);
 }
 
 function findUniqFromStrings(series: string[]): string {
-  const results = [
+  return [
     findUniqElementBy(series, ele => Number.isNaN(parseInt(ele, 10))),
     findUniqElementBy(series, ele => ele === '.'),
     findUniqElementBy(series, ele => ele === ele.toLowerCase()),
-  ];
-
-  const uniqElement = results.find(result => result !== undefined);
-  if (uniqElement !== undefined) {
-    return uniqElement;
-  }
-
-  const firstElementCount = count(series, ele => ele === series[0]);
-  if (firstElementCount === 1) {
-    return series[0];
-  } else {
-    return series.find(ele => ele !== series[0]);
-  }
+    findUniqElementBy(series, ele => series.filter(el => el === ele).length === 1, false),
+  ].find(result => result !== undefined);
 }
-
-function findUniqFromBooleans(series: boolean[]): boolean {
-  const firstElementCount = count(series, ele => ele === series[0]);
-  if (firstElementCount === 1) {
-    return series[0];
-  } else {
-    return series.find(ele => ele !== series[0]);
-  }
-}
-
 
 function findUniqElement(series: Element[]): Element {
-  const numString = count(series, element => typeof element === 'string');
-  const numBoolean = count(series, element => typeof element === 'boolean');
+  const results = [
+    findUniqElementBy(series, ele => typeof ele === 'string'),
+    findUniqElementBy(series, ele => typeof ele === 'boolean'),
+  ];
 
-  if (numString === 1) {
-    return series.find(element => typeof element === 'string');
-  } else if (numBoolean === 1) {
-    return series.find(element => typeof element === 'boolean');
-  } else {
-    return series.find(element => typeof element === 'number');
-  }
+  return results.find(result => result !== undefined);
 }
 
-function findUniqElementBy<T>(series: Array<T>, fn: (element: T) => boolean): T | undefined {
+function findUniqElementBy<T>(series: Array<T>, fn: (element: T) => boolean, canRevert = true): T | undefined {
   const matchedElements = series.filter(ele => fn(ele));
-  const notMatchedElements = series.filter(ele => !fn(ele));
-  const uniqElements = [matchedElements, notMatchedElements].find(
-    elements => elements.length === 1);
+  const notMatchedElements = series.filter(ele => canRevert && !fn(ele));
+  const uniqElements = [matchedElements, notMatchedElements].find(elements => elements.length === 1);
   return uniqElements ? uniqElements[0] : undefined;
-}
-
-function count<T>(series: Array<T>, fn: (element: T) => boolean): number {
-  return series.reduce<number>((acc, element) => {
-    if (fn(element)) {
-      return acc + 1;
-    } else {
-      return acc;
-    }
-  }, 0);
 }
