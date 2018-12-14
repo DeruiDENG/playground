@@ -2,9 +2,7 @@
  * What doesn't belong to these?
  * https://www.codewars.com/kata/what-doesnt-belong-to-these/train/typescript
  */
-
 type Element = number | string | boolean;
-
 
 export function findTheNotFittingElement(series: Element[]): Element {
   let result: Element;
@@ -34,28 +32,14 @@ function isSeriesAllNumber(series: Element[]): series is number[] {
 }
 
 function findUniqFromNumbers(series: number[]): number {
-  const [oddCount, doubleCount] = [
-    count(series, ele => ele % 2 === 1),
-    count(series, ele => ele % 2 === 0)];
+  const results = [
+    findUniqElementBy(series, ele => ele % 2 === 1),
+    findUniqElementBy(series, ele => ele > 0),
+  ];
 
-  if (oddCount === 1) {
-    return series.find(ele => ele % 2 === 1);
-  }
-
-  if (doubleCount === 1) {
-    return series.find(ele => ele % 2 === 0);
-  }
-
-  const [positiveCount, negativeCount] = [
-    count(series, ele => ele > 0),
-    count(series, ele => ele < 0)];
-
-  if (positiveCount === 1) {
-    return series.find(element => element > 0);
-  }
-
-  if (negativeCount === 1) {
-    return series.find(element => element < 0);
+  const uniqElement = results.find(result => result !== undefined);
+  if (uniqElement !== undefined) {
+    return uniqElement;
   }
 
   const firstElementCount = count(series, ele => ele === series[0]);
@@ -67,43 +51,15 @@ function findUniqFromNumbers(series: number[]): number {
 }
 
 function findUniqFromStrings(series: string[]): string {
-  const [numberCount, nonNumberCount] = [
-    count(series, ele => !Number.isNaN(parseInt(ele, 10))),
-    count(series, ele => Number.isNaN(parseInt(ele, 10)))
+  const results = [
+    findUniqElementBy(series, ele => Number.isNaN(parseInt(ele, 10))),
+    findUniqElementBy(series, ele => ele === '.'),
+    findUniqElementBy(series, ele => ele === ele.toLowerCase()),
   ];
 
-  if (numberCount === 1) {
-    return series.find(ele => !Number.isNaN(parseInt(ele, 10)));
-  }
-
-  if (nonNumberCount === 1) {
-    return series.find(ele => Number.isNaN(parseInt(ele, 10)));
-  }
-
-  const [dotCount, nonDotCount] = [
-    count(series, ele => ele === '.'),
-    count(series, ele => ele !== '.')
-  ];
-
-  if (dotCount === 1) {
-    return series.find(ele => ele === '.');
-  }
-
-  if (nonDotCount === 1) {
-    return series.find(ele => ele !== '.');
-  }
-
-  const [lowerCaseCount, upperCaseCount] = [
-    count(series, ele => ele === ele.toLowerCase()),
-    count(series, ele => ele === ele.toUpperCase())
-  ];
-
-  if (lowerCaseCount === 1) {
-    return series.find(ele => ele === ele.toLowerCase());
-  }
-
-  if (upperCaseCount === 1) {
-    return series.find(ele => ele === ele.toUpperCase());
+  const uniqElement = results.find(result => result !== undefined);
+  if (uniqElement !== undefined) {
+    return uniqElement;
   }
 
   const firstElementCount = count(series, ele => ele === series[0]);
@@ -135,6 +91,14 @@ function findUniqElement(series: Element[]): Element {
   } else {
     return series.find(element => typeof element === 'number');
   }
+}
+
+function findUniqElementBy<T>(series: Array<T>, fn: (element: T) => boolean): T | undefined {
+  const matchedElements = series.filter(ele => fn(ele));
+  const notMatchedElements = series.filter(ele => !fn(ele));
+  const uniqElements = [matchedElements, notMatchedElements].find(
+    elements => elements.length === 1);
+  return uniqElements ? uniqElements[0] : undefined;
 }
 
 function count<T>(series: Array<T>, fn: (element: T) => boolean): number {

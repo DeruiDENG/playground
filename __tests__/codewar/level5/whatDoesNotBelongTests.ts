@@ -4,6 +4,7 @@ import { findTheNotFittingElement } from '../../../src/codewar/level5/whatDoesNo
 describe('solution', function () {
   it('exampleTests', function () {
     assert.equal(findTheNotFittingElement([1, 2, 2, 2, 2]), 1);
+    assert.equal(findTheNotFittingElement([1, 3, 5, 7, 2]), 2);
     assert.equal(findTheNotFittingElement([true, true, true, false, true]), false);
     assert.equal(findTheNotFittingElement(['a', 'a', 'b', 'a', 'a', 'a', 'a']), 'b');
     assert.equal(findTheNotFittingElement(['1', 2, '4', '6', '8']), 2);
