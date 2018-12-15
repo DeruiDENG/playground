@@ -14,6 +14,9 @@ describe('Fixed Tests', function () {
     expect(G964.countKprimes(5, 500, 600))
       .toEqual([500, 520, 552, 567, 588, 592, 594]);
   });
+
+  it('should puzzle work', function () {
+    expect(G964.puzzle(138)).toBe(1);
+    expect(G964.puzzle(143)).toBe(2);
+  });
 });
-
-

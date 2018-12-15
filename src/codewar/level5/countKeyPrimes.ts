@@ -10,7 +10,20 @@ export class G964 {
   };
   public static puzzle = (s: number): number => {
     // you code
-    return 0;
+    const k1Primes = G964.countKprimes(1, 2, s);
+    const k3Primes = G964.countKprimes(3, 2, s);
+    const k7Primes = G964.countKprimes(7, 2, s);
+    let count = 0;
+    for (const k7Prime of k7Primes) {
+      for (const k3Prime of k3Primes) {
+        for (const k1Prime of k1Primes) {
+          if (k7Prime + k3Prime + k1Prime === s) {
+            count++;
+          }
+        }
+      }
+    }
+    return count;
   };
 }
 
