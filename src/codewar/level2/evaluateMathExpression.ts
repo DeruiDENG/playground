@@ -7,7 +7,7 @@ const LastBinaryAddRegex = /(?<=\d)\+(?!.*\d\+)/;
 const LastBinaryMinusRegex = /(?<=\d)-(?!.*\d-)/;
 const LastBinaryMultiplicationRegex = /(?<=\d)\*(?!.*\d\*)/;
 const LastBinaryDivisionRegex = /(?<=\d)\/(?!.*\d\/)/;
-const InnerMostParenthesesRegex = /\((?!.*\()(\d|\+|-|\*|\/)*\)/;
+const InnerMostParenthesesRegex = /\((?!.*\()(\.|\d|\+|-|\*|\/)*\)/;
 
 export function calc(expression: string | number): number {
   if (typeof expression === 'number') {
@@ -32,6 +32,7 @@ function removeParentheses(str: string): string {
  * @param expression
  */
 function calcPure(expression: string): number {
+  console.log(`compute: ${expression}`);
   const separatedByPlus = expression.split(LastBinaryAddRegex);
   if (separatedByPlus.length === 2) {
     return calcPure(separatedByPlus[0]) + calcPure(separatedByPlus[1]);
