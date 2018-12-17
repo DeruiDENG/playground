@@ -10,5 +10,5 @@ export function remove<T>(array: Array<T>, ele: T): Array<T> {
 }
 
 export function uniq<T>(array: Array<T>): Array<T> {
-  return [...Array.from(new Set(array))];
+  return Array.from(new Set(array));
 }
