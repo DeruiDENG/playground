@@ -31,3 +31,13 @@ export function findPrimes(max: number): number[] {
   }, primes);
   return primes;
 }
+
+export function factorial(num: number): number {
+  if (num < 0) {
+    return -1;
+  } else if (num === 0 || num === 1) {
+    return 1;
+  }
+
+  return num * factorial(num - 1);
+}
