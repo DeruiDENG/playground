@@ -1,3 +1,8 @@
+/**
+ * Path Finder #3: the Alpinist
+ * https://www.codewars.com/kata/path-finder-number-3-the-alpinist
+ */
+
 type Point = { altitude: number, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
 type Area = {
   points: Point[],
