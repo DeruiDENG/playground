@@ -1,52 +1,76 @@
-type Point = { altitude: number, distance: number }
-type Area = Point[][];
+type Point = { altitude: number, distance: number, confirmed: boolean, row: number, column: number }
+type Area = {
+  points: Point[],
+  readonly size: number,
+};
 
 export function pathFinder(area: string): number {
   const parsedArea = parseArea(area);
-  const dimension = parsedArea.length;
-  for (let i = 0; i < dimension * 2 - 2; i++) {
-    if (i < dimension - 1) {
-      let row = 0;
-      let column = i + 1;
-      while (column >= 0) {
-        parsedArea[row][column].distance = findDistance(parsedArea, column, row);
-        column--;
-        row++;
-      }
-    } else {
-      let column = dimension - 1;
-      let row = i - dimension + 2;
-      while (row <= dimension - 1) {
-        parsedArea[row][column].distance = findDistance(parsedArea, column, row);
-        column--;
-        row++;
-      }
-    }
-  }
-  return parsedArea[dimension - 1][dimension - 1].distance;
+  return findShortestPath(
+    parsedArea,
+    { row: 0, column: 0 },
+    { row: parsedArea.size - 1, column: parsedArea.size - 1 });
 }
 
-function findDistance(area: Area, column: number, row: number) {
-  const currentPoint = area[row][column];
-  const pointsToCheck: Point[] = [];
-  if (row !== 0) {
-    pointsToCheck.push(area[row - 1][column]);
-  }
-  if (column !== 0) {
-    pointsToCheck.push(area[row][column - 1]);
+function findShortestPath(
+  area: Area,
+  start: { row: number, column: number },
+  end: { row: number, column: number }): number {
+  const startPoint = getPoint(area, start.row, start.column);
+  startPoint.distance = 0;
+  while (getPoint(area, end.row, end.column).confirmed !== true) {
+    const point = findNextUnconfirmedPoint(area);
+    labelAllAdjacentPoints(area, point);
+    point.confirmed = true;
   }
 
-  return Math.min(
-    ...pointsToCheck.map(
-      pointToCheck =>
-        pointToCheck.distance + Math.abs(pointToCheck.altitude - currentPoint.altitude)));
+  return getPoint(area, end.row, end.column).distance;
+}
+
+function findNextUnconfirmedPoint(area: Area): Point {
+  let smallestDistance = Number.MAX_SAFE_INTEGER;
+  let smallestPoint: Point = null;
+  area.points.filter(point => point.confirmed === false).forEach(point => {
+    if (point.distance < smallestDistance) {
+      smallestDistance = point.distance;
+      smallestPoint = point;
+    }
+  });
+
+  return smallestPoint;
+}
+
+function labelAllAdjacentPoints(area: Area, point: Point) {
+  const { column, row } = point;
+  const adjacentPointsPos = [[row, column - 1], [row, column + 1], [row - 1, column], [row + 1, column]];
+  const adjacentPoints = adjacentPointsPos.map(([row, column]) => getPoint(area, row, column))
+    .filter(point => !!point && point.confirmed === false);
+  adjacentPoints.forEach(adjacentPoint => {
+    const distanceFromCurrentPoint = Math.abs(point.altitude - adjacentPoint.altitude);
+    const calculatedDistance = distanceFromCurrentPoint + point.distance;
+    adjacentPoint.distance = Math.min(adjacentPoint.distance, calculatedDistance);
+  });
+}
+
+function getPoint(area: Area, row: number, column: number) {
+  if (row < 0 || row >= area.size || column < 0 || column >= area.size) {
+    return null;
+  }
+
+  const { points, size } = area;
+  return points[row * size + column];
 }
 
 function parseArea(area: string): Area {
   const rows = area.split('\n');
-  const parsedArea = rows.map(row =>
+  const result = rows.map((row, rowIndex) =>
     row.split('')
-      .map(altitude => ({ altitude: parseInt(altitude, 10), distance: null })));
-  parsedArea[0][0].distance = 0;
-  return parsedArea;
+      .map((altitude, columnIndex) => ({
+        altitude: parseInt(altitude, 10),
+        distance: Number.MAX_SAFE_INTEGER,
+        confirmed: false,
+        column: columnIndex,
+        row: rowIndex
+      })));
+  return { points: result.reduce((acc, row) => [...acc, ...row], []), size: result.length };
 }
