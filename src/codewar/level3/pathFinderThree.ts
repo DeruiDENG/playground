@@ -1,6 +1,7 @@
-type Point = { altitude: number, distance: number, confirmed: boolean, row: number, column: number }
+type Point = { altitude: number, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
 type Area = {
   points: Point[],
+  priority: Point[],
   readonly size: number,
 };
 
@@ -17,10 +18,14 @@ function findShortestPath(
   start: { row: number, column: number },
   end: { row: number, column: number }): number {
   const startPoint = getPoint(area, start.row, start.column);
+  const { priority } = area;
   startPoint.distance = 0;
+  priority.push(startPoint);
   while (getPoint(area, end.row, end.column).confirmed !== true) {
     const point = findNextUnconfirmedPoint(area);
     labelAllAdjacentPoints(area, point);
+    area.priority = area.priority.filter(
+      pPoint => pPoint.column !== point.column || pPoint.row !== point.row);
     point.confirmed = true;
   }
 
@@ -30,7 +35,7 @@ function findShortestPath(
 function findNextUnconfirmedPoint(area: Area): Point {
   let smallestDistance = Number.MAX_SAFE_INTEGER;
   let smallestPoint: Point = null;
-  area.points.filter(point => point.confirmed === false).forEach(point => {
+  area.priority.filter(point => point.confirmed === false).forEach(point => {
     if (point.distance < smallestDistance) {
       smallestDistance = point.distance;
       smallestPoint = point;
@@ -49,6 +54,10 @@ function labelAllAdjacentPoints(area: Area, point: Point) {
     const distanceFromCurrentPoint = Math.abs(point.altitude - adjacentPoint.altitude);
     const calculatedDistance = distanceFromCurrentPoint + point.distance;
     adjacentPoint.distance = Math.min(adjacentPoint.distance, calculatedDistance);
+    if (adjacentPoint.touched === false) {
+      area.priority.push(adjacentPoint);
+      adjacentPoint.touched = true;
+    }
   });
 }
 
@@ -70,7 +79,12 @@ function parseArea(area: string): Area {
         distance: Number.MAX_SAFE_INTEGER,
         confirmed: false,
         column: columnIndex,
-        row: rowIndex
+        row: rowIndex,
+        touched: false,
       })));
-  return { points: result.reduce((acc, row) => [...acc, ...row], []), size: result.length };
+  return {
+    points: result.reduce((acc, row) => [...acc, ...row], []),
+    size: result.length,
+    priority: [],
+  };
 }
