@@ -1,32 +1,22 @@
 export function hamming(n: number): number {
-  let count = 0;
-  let num = 1;
-  while (true) {
-    if (isHamming(num)) {
-      count++;
-    }
+  let results = [1];
+  let indices = [0, 0, 0];
+  let primes = [2, 3, 5];
+  let nextMultiple = [2, 3, 5];
 
-    if (count === n) {
-      return num;
-    }
+  for (let i = 0; i < n; ++i) {
+    results.push(Math.min(...nextMultiple));
+    const mostRecent = results[results.length - 1];
+    for (let j = 0; j < primes.length; j++) {
+      const prime = primes[j];
+      if (nextMultiple[j] === mostRecent) {
+        nextMultiple[j] = prime * results[++indices[j]];
+      }
 
-    num++;
+    }
   }
+
+  return results[n - 1];
 }
 
-function isHamming(n: number): boolean {
-  while (n % 2 === 0) {
-    n /= 2;
-  }
-
-  while (n % 3 === 0) {
-    n /= 3;
-  }
-
-  while (n % 5 === 0) {
-    n /= 5;
-  }
-
-  return n === 1;
-}
 
