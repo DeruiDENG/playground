@@ -96,7 +96,7 @@ function encodeUsingDictionary(s: string, dictionary: any) {
 }
 
 export function encode(freqs: Frequency[], s: string) {
-  if (!s) {
+  if (!freqs || freqs.length <= 1) {
     return null;
   }
 
@@ -109,7 +109,7 @@ export function encode(freqs: Frequency[], s: string) {
 }
 
 export function decode(freqs: Frequency[], bits: string): string {
-  if (!bits) {
+  if (!freqs || freqs.length <= 1) {
     return null;
   }
 
