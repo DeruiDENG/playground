@@ -10,28 +10,29 @@
  * Therefore, we have the following formula:
  * p(n, m) = p(n-m, m) + p(n, m-1)
  */
-const map = new Map<string, number>();
 
 export function sum(num: number): number {
+  const map = new Map<string, number>();
+  function explosiveSum(num: number, limit: number): number {
+    if (num < 0) {
+      return 0;
+    }
+
+    if (num === 0 || limit === 1) {
+      return 1;
+    }
+
+    const key = `${num},${limit}`;
+    const cacheResult = map.get(key);
+    if (cacheResult !== undefined) {
+      return cacheResult;
+    }
+
+    const result = explosiveSum(num - limit, limit) + explosiveSum(num, limit - 1);
+    map.set(key, result);
+    return result;
+  }
   return explosiveSum(num, num);
 }
 
-function explosiveSum(num: number, limit: number): number {
-  if (num < 0) {
-    return 0;
-  }
 
-  if (num === 0 || limit === 1) {
-    return 1;
-  }
-
-  const key = `${num},${limit}`;
-  const cacheResult = map.get(key);
-  if (cacheResult !== undefined) {
-    return cacheResult;
-  }
-
-  const result = explosiveSum(num - limit, limit) + explosiveSum(num, limit - 1);
-  map.set(key, result);
-  return result;
-}

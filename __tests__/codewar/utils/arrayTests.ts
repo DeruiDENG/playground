@@ -1,4 +1,4 @@
-import { remove, uniq } from '../../../src/codewar/utils/array';
+import { remove, repeat, uniq } from '../../../src/codewar/utils/array';
 
 describe('arrayTests', function () {
   it('should removeWorks', function () {
@@ -14,5 +14,12 @@ describe('arrayTests', function () {
     expect(uniq([1, 3, 5, 5, 3]).sort()).toEqual([1, 3, 5].sort());
     expect(uniq(['1', '5', '6', '6']).sort()).toEqual(['1', '5', '6'].sort());
     expect(uniq(['1', '5', '6', '66']).sort()).toEqual(['1', '5', '6', '66'].sort());
+  });
+
+  it('should repeat work', function () {
+    expect(repeat(3, 5)).toEqual([3, 3, 3, 3, 3]);
+    expect(repeat([3], 3)).toEqual([[3], [3], [3]]);
+    expect(repeat('a', 3)).toEqual(['a', 'a', 'a']);
+    expect(repeat({ a: 3 }, 3)).toEqual([{ a: 3 }, { a: 3 }, { a: 3 }]);
   });
 });
