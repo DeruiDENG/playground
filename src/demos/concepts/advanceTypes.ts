@@ -26,6 +26,7 @@ function processResult(result: Result) {
   if (result.success) {
     console.log(`Success with response: ${result.response}`);
   } else {
+    // @ts-ignore
     console.log(`Failed with error: ${result.error}`);
   }
 }
@@ -38,5 +39,6 @@ const retrieveDataFromBackend = (): Promise<{ versionNumber: number }> => {
   return Promise.resolve({ versionNumber: 5 });
 };
 
-retrieveDataFromBackend().then(({ versionNumber }) => console.log(`Version number is ${versionNumber}`));
+retrieveDataFromBackend()
+  .then(({ versionNumber }) => console.log(`Version number is ${versionNumber}`));
 
