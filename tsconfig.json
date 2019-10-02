@@ -4,14 +4,15 @@
     "sourceMap": true,
     "strictNullChecks": false,
     "module": "commonjs",
-    "target": "es5",
+    "target": "ES6",
     "lib": [
-      "es5",
-      "es7",
       "dom",
-      "es2017"
+      "dom.iterable",
+      "esnext",
+      "es6",
+      "es7"
     ],
-    "jsx": "react"
+    "jsx": "preserve"
   },
   "include": [
     "./src/**/*"
