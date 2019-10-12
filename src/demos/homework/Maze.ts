@@ -1,15 +1,15 @@
-export type Dimension = {
+export interface Dimension {
   x: number, y: number,
-};
+}
 
 enum BlockType {
   Wall, Street,
 }
 
-type RobotCommand = {
+interface RobotCommand {
   direction: 'W' | 'A' | 'S' | 'D',
   repeatCount: number,
-};
+}
 
 export interface ConnectivityInfo {
   start: Dimension;

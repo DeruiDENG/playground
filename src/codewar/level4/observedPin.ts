@@ -18,11 +18,11 @@ const possibilityMap = {
 
 
 export function getPINs(observed: string): string[] {
-  const mappedChars: Array<string[]> = observed.split('').map(char => possibilityMap[char]);
+  const mappedChars: string[][] = observed.split('').map(char => possibilityMap[char]);
   return processMappedChar('', mappedChars);
 }
 
-function processMappedChar(prefix: string, mappedChars: Array<string[]>) {
+function processMappedChar(prefix: string, mappedChars: string[][]) {
   if (mappedChars.length === 1) {
     return mappedChars[0].map(possibleChar => `${prefix}${possibleChar}`);
   }

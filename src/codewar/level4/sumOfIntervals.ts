@@ -5,7 +5,7 @@
 import { range } from '../utils/integers';
 import { uniq } from '../utils/array';
 
-export function sumIntervals(intervals: Array<number[]>): number {
+export function sumIntervals(intervals: number[][]): number {
   const intervalIndexes: number[] = [];
   for (const [start, end] of intervals) {
     intervalIndexes.push(...range(start, end - 1));

@@ -1,6 +1,5 @@
 export class G964 {
   public static accum(s: string): string {
-    let a = '';
     let results: string[] = [];
     for (let i = 0; i < s.length; i++) {
       const repeatTime = i + 1;

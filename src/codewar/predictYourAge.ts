@@ -8,6 +8,10 @@
 // Take the square root of the result.
 // Divide by two.
 
+const getTotal = (numbers: number[]): number => {
+  return numbers.reduce((acc, value) => acc + value, 0);
+};
+
 export function predictAge(
   age1: number,
   age2: number,
@@ -24,10 +28,6 @@ export function predictAge(
   const total = getTotal(multipliedInput);
   return Math.floor(Math.sqrt(total) / 2);
 }
-
-const getTotal = (numbers: number[]): number => {
-  return numbers.reduce((acc, value) => acc + value, 0);
-};
 
 const result = predictAge(65, 60, 75, 55, 60, 63, 64, 45);
 console.log(result);

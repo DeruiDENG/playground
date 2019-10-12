@@ -1,10 +1,10 @@
 import * as readline from 'readline';
 import { ConnectivityInfo, Dimension } from './Maze';
 
-type RobotCommand = {
+interface RobotCommand {
   direction: 'W' | 'A' | 'S' | 'D';
   repeatCount: number;
-};
+}
 
 export const promptInput = (promptMessage: string) => {
   const rl = readline.createInterface({

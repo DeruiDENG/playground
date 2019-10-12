@@ -1,4 +1,4 @@
-export function remove<T>(array: Array<T>, ele: T): Array<T> {
+export function remove<T>(array: T[], ele: T): T[] {
   const index = array.indexOf(ele);
   if (index !== -1) {
     const newArray = [...array];
@@ -9,12 +9,12 @@ export function remove<T>(array: Array<T>, ele: T): Array<T> {
   return array;
 }
 
-export function uniq<T>(array: Array<T>): Array<T> {
+export function uniq<T>(array: T[]): T[] {
   return Array.from(new Set(array));
 }
 
 
-export function repeat<T>(element: T, times: number): Array<T> {
+export function repeat<T>(element: T, times: number): T[] {
   const arr = [];
   while (arr.length !== times) {
     arr.push(element);

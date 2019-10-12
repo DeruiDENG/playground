@@ -4,13 +4,13 @@
  */
 
 type Frequency = [string, number];
-type HuffmanChunk = {
+interface HuffmanChunk {
   type: 'chunk',
   frequency: number,
   leftLeaf: HuffmanChunk | HuffmanLeave,
   rightLeaf: HuffmanChunk | HuffmanLeave
 }
-type HuffmanLeave = {
+interface HuffmanLeave {
   type: 'leave',
   char: string,
   frequency: number,

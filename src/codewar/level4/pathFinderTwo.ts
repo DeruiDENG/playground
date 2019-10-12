@@ -3,12 +3,12 @@
  * https://www.codewars.com/kata/path-finder-number-3-the-alpinist
  */
 
-type Point = { isPath: boolean, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
-type Maze = {
+interface Point { isPath: boolean, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
+interface Maze {
   points: Point[],
   priority: Point[],
   readonly size: number,
-};
+}
 
 export function pathFinder(maze: string): number | false {
   const parsedMaze = parseMaze(maze);

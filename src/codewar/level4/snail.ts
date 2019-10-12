@@ -3,7 +3,7 @@
  * https://www.codewars.com/kata/snail
  */
 
-export function snail(array: Array<number[]>): number[] {
+export function snail(array: number[][]): number[] {
   const snailMap = new SnailMap(array);
   const result = snailMap.move();
   return result;
@@ -17,10 +17,10 @@ const Direction = {
 };
 
 class SnailMap {
-  private array: Array<number[]>;
+  private array: number[][];
   private currentPos: { row: number, column: number };
 
-  constructor(array: Array<number[]>) {
+  constructor(array: number[][]) {
     this.array = array;
     this.currentPos = { row: 0, column: 0 };
   }

@@ -3,7 +3,7 @@
  * https://www.codewars.com/kata/matrix-determinant/train/typescript
  */
 
-export function determinant(m: Array<number[]>): number {
+export function determinant(m: number[][]): number {
   if (m.length === 1) {
     return m[0][0];
   }
@@ -21,7 +21,7 @@ export function determinant(m: Array<number[]>): number {
   return total;
 }
 
-export function getSubMatrix(m: Array<number[]>, column: number): Array<number[]> {
+export function getSubMatrix(m: number[][], column: number): number[][] {
   return m.filter((row, index) => index !== 0)
     .map(row => row.filter((element, index) => index !== column));
 }

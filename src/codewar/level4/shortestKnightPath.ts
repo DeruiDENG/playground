@@ -3,11 +3,11 @@
  * https://www.codewars.com/kata/shortest-knight-path/train/javascript
  */
 
-type Point = { distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
-type Chess = {
+interface Point { distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
+interface Chess {
   points: Point[],
   readonly size: number,
-};
+}
 
 export function knight(start: string, finish: string): number {
   const chess = parseChess();

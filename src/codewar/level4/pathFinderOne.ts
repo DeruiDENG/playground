@@ -3,12 +3,12 @@
  * https://www.codewars.com/kata/5765870e190b1472ec0022a2
  */
 
-type Point = { isPath: boolean, touched: boolean, row: number, column: number }
-type Maze = {
+interface Point { isPath: boolean, touched: boolean, row: number, column: number }
+interface Maze {
   points: Point[],
   priority: Point[],
   readonly size: number,
-};
+}
 
 export function pathFinder(maze: string): boolean {
   const parsedMaze = parseMaze(maze);

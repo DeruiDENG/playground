@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Type Inference for rest parameters
 const props = {
   price: 5,

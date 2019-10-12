@@ -57,7 +57,7 @@ function findUniqElement(series: Element[]): Element {
   return results.find(result => result !== undefined);
 }
 
-function findUniqElementBy<T>(series: Array<T>, fn: (element: T) => boolean, canRevert = true): T | undefined {
+function findUniqElementBy<T>(series: T[], fn: (element: T) => boolean, canRevert = true): T | undefined {
   const matchedElements = series.filter(ele => fn(ele));
   const notMatchedElements = series.filter(ele => canRevert && !fn(ele));
   const uniqElements = [matchedElements, notMatchedElements].find(elements => elements.length === 1);

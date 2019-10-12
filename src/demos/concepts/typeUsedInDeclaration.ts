@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // Boolean
 const isActive: boolean = true;
 const isAlive = true;

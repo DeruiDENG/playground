@@ -8,7 +8,7 @@ enum Categary {
   ThirdLine,
 }
 
-type KeyMap = { type: Categary, chars: string[] }
+interface KeyMap { type: Categary, chars: string[] }
 const keyMaps: KeyMap[] = [
   {
     type: Categary.FirstLine,

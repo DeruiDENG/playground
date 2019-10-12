@@ -1,7 +1,7 @@
-type WordWithFormat = {
+interface WordWithFormat {
   word: string,
   lineNumbers: number[],
-};
+}
 
 const parseSegments = (text: string): string[] => {
   const rawSegments = text.split(' ');

@@ -42,7 +42,8 @@
     "build-node": "webpack --mode=development --config=webpack.node-demo.config.js",
     "watch-node": "webpack --mode=development --config=webpack.node-demo.config.js --watch",
     "test": "jest",
-    "testWithCoverage": "jest --coverage"
+    "testWithCoverage": "jest --coverage",
+    "lint": "eslint ./src --ext .ts --ext .tsx"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

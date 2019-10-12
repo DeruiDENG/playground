@@ -3,12 +3,12 @@
  * https://www.codewars.com/kata/path-finder-number-3-the-alpinist
  */
 
-type Point = { altitude: number, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
-type Area = {
+interface Point { altitude: number, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
+interface Area {
   points: Point[],
   priority: Point[],
   readonly size: number,
-};
+}
 
 export function pathFinder(area: string): number {
   const parsedArea = parseArea(area);
