@@ -5,33 +5,10 @@
   "author": "DeruiDeng",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "core-js": "3",
-    "eslint-plugin-react": "^7.15.1",
-    "lodash": "^4.17.15",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-hot-loader": "^4.3.4",
-    "react-router-dom": "^4.3.1",
-    "typescript": "^3.5.3"
-  },
-  "browserslist": {
-    "production": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version",
-      "IE 11"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version",
-      "IE 11"
-    ]
-  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "webpack --mode=development",
-    "start": "webpack-dev-server --open --mode=development",
     "build-node": "webpack --mode=development --config=webpack.node-demo.config.js",
     "watch-node": "webpack --mode=development --config=webpack.node-demo.config.js --watch",
     "test": "jest",
@@ -60,19 +37,21 @@
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
     "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^1.0.0",
+    "css-loader": "^3.4.2",
     "eslint": "^6.1.0",
+    "eslint-plugin-react": "^7.15.1",
     "eslint-config-prettier": "^6.0.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.0.0",
     "path": "^0.12.7",
     "prettier": "^1.19.1",
-    "sass-loader": "^7.1.0",
+    "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.3",
-    "style-loader": "^0.22.1",
+    "style-loader": "^1.1.3",
     "ts-node": "^7.0.1",
-    "webpack": "^4.16.5",
+    "webpack": "^4.41.6",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "node-sass": "^4.13.1"
   }
 }
