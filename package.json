@@ -9,11 +9,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build-node": "webpack --mode=development --config=webpack.node-demo.config.js",
-    "watch-node": "webpack --mode=development --config=webpack.node-demo.config.js --watch",
-    "test": "jest",
-    "testWithCoverage": "jest --coverage",
-    "lint": "eslint . --ext .ts --ext .tsx --ext .js"
+    "test": "lerna run test --parallel",
+    "lint": "lerna run lint --parallel"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -32,7 +29,6 @@
     "@types/webpack": "^4.4.10",
     "@typescript-eslint/eslint-plugin": "^2.19.2",
     "@typescript-eslint/parser": "^2.19.2",
-    "typescript": "^3.7.5",
     "awesome-typescript-loader": "^5.2.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
@@ -44,6 +40,7 @@
     "eslint-plugin-react": "^7.15.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^25.0.0",
+    "lerna": "^3.20.2",
     "node-sass": "^4.13.1",
     "path": "^0.12.7",
     "prettier": "^1.19.1",
@@ -51,6 +48,7 @@
     "source-map-loader": "^0.2.3",
     "style-loader": "^1.1.3",
     "ts-node": "^7.0.1",
+    "typescript": "^3.7.5",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.7.2"

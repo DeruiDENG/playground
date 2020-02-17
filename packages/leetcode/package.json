@@ -4,7 +4,7 @@
   "dependencies": {
   },
   "scripts": {
-    "lint": "eslint ./src --ext .ts --ext .tsx",
-    "test": "jest"
+    "lint": "eslint ./src --ext .js",
+    "test": "jest --passWithNoTests"
   }
 }
