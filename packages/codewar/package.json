@@ -1,0 +1,11 @@
+{
+  "name": "codewar",
+  "version": "1.0.0",
+  "dependencies": {
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "lint": "eslint ./src --ext .ts --ext .tsx",
+    "test": "jest"
+  }
+}
