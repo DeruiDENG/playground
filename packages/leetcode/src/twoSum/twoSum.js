@@ -3,7 +3,5 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
-
-};
-
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+var twoSum = function(nums, target) {};
