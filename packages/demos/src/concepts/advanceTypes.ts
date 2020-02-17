@@ -19,14 +19,13 @@ type Result =
   | { success: false; error: string };
 
 
-let result1: Result = { success: true, response: 'DOT' };
-let result2: Result = { success: false, error: 'Error text' };
+const result1: Result = { success: true, response: 'DOT' };
+const result2: Result = { success: false, error: 'Error text' };
 
 function processResult(result: Result) {
   if (result.success) {
     console.log(`Success with response: ${result.response}`);
   } else {
-    // @ts-ignore
     console.log(`Failed with error: ${result.error}`);
   }
 }

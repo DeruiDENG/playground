@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
     "sourceMap": true,
     "strict": true,
-    "strictNullChecks": false,
     "module": "commonjs",
     "target": "ES6",
     "lib": [
@@ -14,11 +12,5 @@
       "es7"
     ],
     "jsx": "preserve"
-  },
-  "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }

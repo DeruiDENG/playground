@@ -55,9 +55,8 @@ const analysisText = (text: string, lineLength: number): WordWithFormat[] => {
   return result;
 };
 
-export const formatText = (text: string, lineLength: number): string => {
-  const wordsWithFormat = analysisText(text, lineLength);
-  return getFormattedWordsString(wordsWithFormat);
+const getFormattedWordString = (wordWithFormat: WordWithFormat): string => {
+  return `${wordWithFormat.word}(${wordWithFormat.lineNumbers.join(',')});`;
 };
 
 const getFormattedWordsString = (wordsWithFormat: WordWithFormat[]): string => {
@@ -69,6 +68,7 @@ const getFormattedWordsString = (wordsWithFormat: WordWithFormat[]): string => {
   return output;
 };
 
-const getFormattedWordString = (wordWithFormat: WordWithFormat): string => {
-  return `${wordWithFormat.word}(${wordWithFormat.lineNumbers.join(',')});`;
+export const formatText = (text: string, lineLength: number): string => {
+  const wordsWithFormat = analysisText(text, lineLength);
+  return getFormattedWordsString(wordsWithFormat);
 };

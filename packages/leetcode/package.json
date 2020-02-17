@@ -1,0 +1,10 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "dependencies": {
+  },
+  "scripts": {
+    "lint": "eslint ./src --ext .ts --ext .tsx",
+    "test": "jest"
+  }
+}
