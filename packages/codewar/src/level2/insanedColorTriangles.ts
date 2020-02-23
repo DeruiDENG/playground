@@ -6,10 +6,15 @@ export function triangle(row: string): Color {
   const rowInDigits = row.split('').map(convertToDigit);
   const lengthOfRow = row.length;
   const multiplier = lengthOfRow % 2 === 0 ? -1 : 1;
-  let rawResult = (multiplier * rowInDigits.reduce(
-    (acc, digit, index) => acc + digit * (lokas(lengthOfRow - 1, index, 3) % 3),
-    // (acc, digit, index) => acc + digit * (calculateBinomialCoefficient(lengthOfRow - 1, index) % 3),
-    0)) % 3;
+  let rawResult =
+    (multiplier *
+      rowInDigits.reduce(
+        (acc, digit, index) =>
+          acc + digit * (lokas(lengthOfRow - 1, index, 3) % 3),
+        // (acc, digit, index) => acc + digit * (calculateBinomialCoefficient(lengthOfRow - 1, index) % 3),
+        0
+      )) %
+    3;
   if (rawResult < 0) {
     rawResult += 3;
   }
@@ -37,10 +42,10 @@ function lokas(n, k, mod) {
     return 1;
   }
 
-  return calculateBinomialCoefficient(n % mod, k % mod) * lokas(
-    (n - n % mod) / mod,
-    (k - k % mod) / mod,
-    mod);
+  return (
+    calculateBinomialCoefficient(n % mod, k % mod) *
+    lokas((n - (n % mod)) / mod, (k - (k % mod)) / mod, mod)
+  );
 }
 
 function calculateBinomialCoefficient(n, k) {

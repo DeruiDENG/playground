@@ -23,7 +23,7 @@ export class Game {
     this.board = board;
   }
 
-  findFood(): { row: number, column: number } | false {
+  findFood(): { row: number; column: number } | false {
     for (let row = 0; row < this.board.length; row++) {
       for (let column = 0; column < this.board[0].length; column++) {
         if (this.board[row][column] === 1) {
@@ -35,9 +35,15 @@ export class Game {
     return false;
   }
 
-  labelFood({ row, column }: { row: number, column: number }) {
+  labelFood({ row, column }: { row: number; column: number }) {
     const { numRow, numColumn } = this.getFoodSize();
-    if (row >= numRow || row < 0 || column >= numColumn || column < 0 || this.board[row][column] !== 1) {
+    if (
+      row >= numRow ||
+      row < 0 ||
+      column >= numColumn ||
+      column < 0 ||
+      this.board[row][column] !== 1
+    ) {
       return;
     }
 
@@ -48,11 +54,11 @@ export class Game {
     this.labelFood({ row, column: column + 1 });
   }
 
-  getFoodSize(): { numRow: number, numColumn: number } {
+  getFoodSize(): { numRow: number; numColumn: number } {
     return {
       numRow: this.board.length,
       numColumn: this.board[0].length,
-    }
+    };
   }
 
   play(): number {

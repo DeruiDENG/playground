@@ -6,12 +6,10 @@ export const promptInput = (promptMessage: string) => {
     output: process.stdout,
   });
 
-  return new Promise<string>(
-    (resolve) => {
-      rl.question(promptMessage, (answer) => {
-        rl.close();
-        resolve(answer);
-      });
-    },
-  );
+  return new Promise<string>(resolve => {
+    rl.question(promptMessage, answer => {
+      rl.close();
+      resolve(answer);
+    });
+  });
 };

@@ -4,8 +4,8 @@
  */
 
 export function undoRedo(object) {
-  let lastChanges: { key: string, oldValue: any }[] = [];
-  let lastUndos: { key: string, oldValue: any }[] = [];
+  let lastChanges: { key: string; oldValue: any }[] = [];
+  let lastUndos: { key: string; oldValue: any }[] = [];
 
   function del(key, reversible = true, preserveUndos = false) {
     if (reversible) {

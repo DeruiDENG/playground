@@ -24,7 +24,7 @@ export function findPrimes(max: number): number[] {
       sieve[l] = false;
     }
   }
-  sieve.forEach(function (value, key) {
+  sieve.forEach(function(value, key) {
     if (value) {
       this.push(key);
     }

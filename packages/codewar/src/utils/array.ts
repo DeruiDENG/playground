@@ -13,7 +13,6 @@ export function uniq<T>(array: T[]): T[] {
   return Array.from(new Set(array));
 }
 
-
 export function repeat<T>(element: T, times: number): T[] {
   const arr = [];
   while (arr.length !== times) {

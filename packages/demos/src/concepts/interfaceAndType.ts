@@ -5,7 +5,7 @@
 
 // We can write:
 interface ObjWithName {
-  name: string,
+  name: string;
 }
 
 const getName = (objWithName: ObjWithName): string => {
@@ -23,5 +23,3 @@ const aObjectWithoutName = {
 
 getName(aObjectWithName);
 // getName(aObjectWithoutName); // compile time error
-
-

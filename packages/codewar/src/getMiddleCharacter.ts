@@ -7,7 +7,7 @@ export class Challenge {
       'aaaa';
       return s.substr(length / 2 - 1, 2);
     } else {
-      'aaa'
+      'aaa';
       return s.substr((length - 1) / 2, 1);
     }
   }

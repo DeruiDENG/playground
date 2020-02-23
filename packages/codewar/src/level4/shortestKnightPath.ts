@@ -3,10 +3,16 @@
  * https://www.codewars.com/kata/shortest-knight-path/train/javascript
  */
 
-interface Point { distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
+interface Point {
+  distance: number;
+  confirmed: boolean;
+  touched: boolean;
+  row: number;
+  column: number;
+}
 interface Chess {
-  points: Point[],
-  readonly size: number,
+  points: Point[];
+  readonly size: number;
 }
 
 export function knight(start: string, finish: string): number {
@@ -16,13 +22,15 @@ export function knight(start: string, finish: string): number {
   return findShortestPath(
     chess,
     { row: startRow, column: startColumn },
-    { row: endRow, column: endColumn });
+    { row: endRow, column: endColumn }
+  );
 }
 
 function findShortestPath(
   chess: Chess,
-  start: { row: number, column: number },
-  end: { row: number, column: number }): number {
+  start: { row: number; column: number },
+  end: { row: number; column: number }
+): number {
   const startPoint = getPoint(chess, start.row, start.column);
   startPoint.distance = 0;
   while (getPoint(chess, end.row, end.column).confirmed !== true) {
@@ -44,12 +52,17 @@ function labelAllAdjacentPoints(maze: Chess, point: Point) {
     [row + 1, column - 2],
     [row + 1, column + 2],
     [row + 2, column - 1],
-    [row + 2, column + 1]];
-  const adjacentPoints = adjacentPointsPos.map(([row, column]) => getPoint(maze, row, column))
+    [row + 2, column + 1],
+  ];
+  const adjacentPoints = adjacentPointsPos
+    .map(([row, column]) => getPoint(maze, row, column))
     .filter(point => !!point && point.confirmed === false);
   adjacentPoints.forEach(adjacentPoint => {
     const calculatedDistance = 1 + point.distance;
-    adjacentPoint.distance = Math.min(adjacentPoint.distance, calculatedDistance);
+    adjacentPoint.distance = Math.min(
+      adjacentPoint.distance,
+      calculatedDistance
+    );
     if (adjacentPoint.touched === false) {
       adjacentPoint.touched = true;
     }
@@ -59,12 +72,14 @@ function labelAllAdjacentPoints(maze: Chess, point: Point) {
 function findNextUnconfirmedPoint(maze: Chess): Point {
   let smallestDistance = Number.MAX_SAFE_INTEGER;
   let smallestPoint: Point = null;
-  maze.points.filter(point => point.confirmed === false).forEach(point => {
-    if (point.distance < smallestDistance) {
-      smallestDistance = point.distance;
-      smallestPoint = point;
-    }
-  });
+  maze.points
+    .filter(point => point.confirmed === false)
+    .forEach(point => {
+      if (point.distance < smallestDistance) {
+        smallestDistance = point.distance;
+        smallestPoint = point;
+      }
+    });
 
   return smallestPoint;
 }
@@ -89,7 +104,7 @@ function parseChess(): Chess {
         confirmed: false,
         touched: false,
         row,
-        column
+        column,
       });
     }
   }

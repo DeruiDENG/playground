@@ -9,7 +9,10 @@ function longestSlideDown(pyramid: number[][]): number {
     const upFloor = pyramid[pyramid.length - 2];
     const baseFloor = pyramid[pyramid.length - 1];
     const updatedUpFloor = upFloor.map((ele, index) => {
-      const largestChildValue = Math.max(baseFloor[index], baseFloor[index + 1]);
+      const largestChildValue = Math.max(
+        baseFloor[index],
+        baseFloor[index + 1]
+      );
       return largestChildValue + ele;
     });
     pyramid = [...pyramid.slice(0, pyramid.length - 2), updatedUpFloor];

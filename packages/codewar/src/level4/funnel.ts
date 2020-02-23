@@ -3,9 +3,14 @@
  * https://www.codewars.com/kata/create-a-funnel/train/javascript
  */
 
-
 export class Funnel {
-  private container: (number | false)[][] = [[false], [false, false], [false, false, false], [false, false, false, false], [false, false, false, false, false]];
+  private container: (number | false)[][] = [
+    [false],
+    [false, false],
+    [false, false, false],
+    [false, false, false, false],
+    [false, false, false, false, false],
+  ];
 
   fill(...nums: number[]) {
     nums.forEach(num => this.fillSingle(num));
@@ -40,10 +45,14 @@ export class Funnel {
       const leftWeight = this.calculateWeight(left.row, left.column);
       const rightWeight = this.calculateWeight(right.row, right.column);
       if (leftWeight >= rightWeight) {
-        this.container[hole.row][hole.column] = this.container[left.row][left.column];
+        this.container[hole.row][hole.column] = this.container[left.row][
+          left.column
+        ];
         this.container[left.row][left.column] = false;
       } else {
-        this.container[hole.row][hole.column] = this.container[right.row][right.column];
+        this.container[hole.row][hole.column] = this.container[right.row][
+          right.column
+        ];
         this.container[right.row][right.column] = false;
       }
     }
@@ -63,7 +72,12 @@ export class Funnel {
     let count = 1;
     this.container.forEach((rowEle, rowIndex) => {
       rowEle.forEach((ele, columnIndex) => {
-        if (rowIndex > row && columnIndex >= column && columnIndex <= column + rowIndex - row && this.container[rowIndex][columnIndex] !== false) {
+        if (
+          rowIndex > row &&
+          columnIndex >= column &&
+          columnIndex <= column + rowIndex - row &&
+          this.container[rowIndex][columnIndex] !== false
+        ) {
           count++;
         }
       });
@@ -73,19 +87,23 @@ export class Funnel {
   }
 
   toString(): string {
-    return [...this.container].reverse().map(row => Funnel.toRowString(row)).join('\n');
+    return [...this.container]
+      .reverse()
+      .map(row => Funnel.toRowString(row))
+      .join('\n');
   }
 
   static toRowString(row: (number | false)[]) {
     const paddingSpace = 5 - row.length;
-    return `${' '.repeat(paddingSpace)}\\${row.map(ele => ele === false ? ' ' : ele.toString())
+    return `${' '.repeat(paddingSpace)}\\${row
+      .map(ele => (ele === false ? ' ' : ele.toString()))
       .join(' ')}/`;
   }
 
-  private findNextEmptySpace(): { row: number, column: number } | false {
-    let result: { row: number, column: number } | false = false;
+  private findNextEmptySpace(): { row: number; column: number } | false {
+    let result: { row: number; column: number } | false = false;
     this.container.forEach((row, rowIndex) => {
-      const columnIndex = row.findIndex((value) => value === false);
+      const columnIndex = row.findIndex(value => value === false);
       if (columnIndex !== -1 && result === false) {
         result = { row: rowIndex, column: columnIndex };
       }
@@ -94,15 +112,16 @@ export class Funnel {
     return result;
   }
 
-  private findHole(): { row: number, column: number } | false {
-    let result: { row: number, column: number } | false = false;
+  private findHole(): { row: number; column: number } | false {
+    let result: { row: number; column: number } | false = false;
     this.container.forEach((row, rowIndex) => {
-      const columnIndex = row.findIndex((
-        value,
-        columnIndex) => value === false
-        && rowIndex !== this.container.length - 1
-        && (this.container[rowIndex + 1][columnIndex] !== false
-          || this.container[rowIndex + 1][columnIndex + 1] !== false));
+      const columnIndex = row.findIndex(
+        (value, columnIndex) =>
+          value === false &&
+          rowIndex !== this.container.length - 1 &&
+          (this.container[rowIndex + 1][columnIndex] !== false ||
+            this.container[rowIndex + 1][columnIndex + 1] !== false)
+      );
       if (columnIndex !== -1 && result === false) {
         result = { row: rowIndex, column: columnIndex };
       }

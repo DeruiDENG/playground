@@ -22,11 +22,17 @@ const isSameNumber = (num: number): boolean => {
 };
 
 const isIncrementSequential = (num: number): boolean => {
-  const digits = num.toString().split('').map(digitString => parseInt(digitString));
+  const digits = num
+    .toString()
+    .split('')
+    .map(digitString => parseInt(digitString));
   for (let i = 1; i < digits.length; i++) {
     const digit = digits[i];
     const prevDigit = digits[i - 1];
-    if (prevDigit === 0 || (digit - prevDigit !== 1 && digit - prevDigit !== -9)) {
+    if (
+      prevDigit === 0 ||
+      (digit - prevDigit !== 1 && digit - prevDigit !== -9)
+    ) {
       return false;
     }
   }
@@ -35,11 +41,14 @@ const isIncrementSequential = (num: number): boolean => {
 };
 
 const isDecrementSequential = (num: number): boolean => {
-  const digits = num.toString().split('').map(digitString => parseInt(digitString));
+  const digits = num
+    .toString()
+    .split('')
+    .map(digitString => parseInt(digitString));
   for (let i = 1; i < digits.length; i++) {
     const digit = digits[i];
     const prevDigit = digits[i - 1];
-    if (prevDigit === 0 || (digit - prevDigit !== -1)) {
+    if (prevDigit === 0 || digit - prevDigit !== -1) {
       return false;
     }
   }
@@ -48,11 +57,19 @@ const isDecrementSequential = (num: number): boolean => {
 };
 
 const isPalindrome = (num: number): boolean => {
-  const digits = num.toString().split('').map(digitString => parseInt(digitString));
-  return digits.every((digit, index) => digit === digits[digits.length - 1 - index]);
+  const digits = num
+    .toString()
+    .split('')
+    .map(digitString => parseInt(digitString));
+  return digits.every(
+    (digit, index) => digit === digits[digits.length - 1 - index]
+  );
 };
 
-const isMatchingAwesomePhrases = (num: number, awesomePhrases: number[]): boolean => {
+const isMatchingAwesomePhrases = (
+  num: number,
+  awesomePhrases: number[]
+): boolean => {
   return awesomePhrases.some(phrase => phrase === num);
 };
 
@@ -63,10 +80,12 @@ const isNumberValid = (num: number): boolean => {
 export class Kata {
   static isInteresting(n: number, awesomePhrases: number[]): number {
     if (Kata.isExactlyInteresting(n, awesomePhrases)) {
-      return 2
+      return 2;
     }
 
-    if ([n + 1, n + 2].some(n => Kata.isExactlyInteresting(n, awesomePhrases))) {
+    if (
+      [n + 1, n + 2].some(n => Kata.isExactlyInteresting(n, awesomePhrases))
+    ) {
       return 1;
     }
 
@@ -74,7 +93,16 @@ export class Kata {
   }
 
   static isExactlyInteresting(n: number, awesomePhrases: number[]): boolean {
-    return isNumberValid(n) && [isFollowByAllZeros, isSameNumber, isIncrementSequential, isDecrementSequential, isPalindrome, isMatchingAwesomePhrases].some(
-      fn => fn(n, awesomePhrases) === true);
+    return (
+      isNumberValid(n) &&
+      [
+        isFollowByAllZeros,
+        isSameNumber,
+        isIncrementSequential,
+        isDecrementSequential,
+        isPalindrome,
+        isMatchingAwesomePhrases,
+      ].some(fn => fn(n, awesomePhrases) === true)
+    );
   }
 }

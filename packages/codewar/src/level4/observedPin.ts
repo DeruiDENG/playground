@@ -16,9 +16,10 @@ const possibilityMap = {
   '0': ['0', '8'],
 };
 
-
 export function getPINs(observed: string): string[] {
-  const mappedChars: string[][] = observed.split('').map(char => possibilityMap[char]);
+  const mappedChars: string[][] = observed
+    .split('')
+    .map(char => possibilityMap[char]);
   return processMappedChar('', mappedChars);
 }
 
@@ -33,7 +34,11 @@ function processMappedChar(prefix: string, mappedChars: string[][]) {
 
   const mappedCharToProcess = mappedChars[0];
   const remainingMappedChars = mappedChars.slice(1);
-  const wrappedPossibleChars = mappedCharToProcess.map(
-    char => processMappedChar(`${prefix}${char}`, remainingMappedChars));
-  return wrappedPossibleChars.reduce((acc, possibleChars) => [...acc, ...possibleChars], []);
+  const wrappedPossibleChars = mappedCharToProcess.map(char =>
+    processMappedChar(`${prefix}${char}`, remainingMappedChars)
+  );
+  return wrappedPossibleChars.reduce(
+    (acc, possibleChars) => [...acc, ...possibleChars],
+    []
+  );
 }

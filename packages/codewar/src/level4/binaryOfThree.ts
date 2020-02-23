@@ -4,4 +4,3 @@
  */
 
 export const multipleOf3Regex = /^\+?((10(1)*(00)*01)|0+|(11))+$/;
-

@@ -18,7 +18,7 @@ const Direction = {
 
 class SnailMap {
   private array: number[][];
-  private currentPos: { row: number, column: number };
+  private currentPos: { row: number; column: number };
 
   constructor(array: number[][]) {
     this.array = array;

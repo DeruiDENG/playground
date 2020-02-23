@@ -12,11 +12,8 @@ export function hamming(n: number): number {
       if (nextMultiple[j] === mostRecent) {
         nextMultiple[j] = prime * results[++indices[j]];
       }
-
     }
   }
 
   return results[n - 1];
 }
-
-

@@ -55,5 +55,3 @@ const arrayOfArray = [
 ];
 
 getLengthOfMissingArray(arrayOfArray);
-
-

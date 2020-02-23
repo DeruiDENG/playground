@@ -4,7 +4,7 @@
  * https://www.codewars.com/kata/pigs-in-a-pen/typescript
  */
 
-type Square = [number, number, number, number]
+type Square = [number, number, number, number];
 
 export class Game {
   private connectedEdge: number[];
@@ -16,7 +16,11 @@ export class Game {
   }
 
   getFirstAvailableSquare(): Square {
-    for (let squareIndex = 0; squareIndex < this.dimension * this.dimension; squareIndex++) {
+    for (
+      let squareIndex = 0;
+      squareIndex < this.dimension * this.dimension;
+      squareIndex++
+    ) {
       const square = this.getSquare(squareIndex);
       if (this.isSquareAvailable(square)) {
         return square;
@@ -25,13 +29,23 @@ export class Game {
   }
 
   getSquare(squareIndex: number): Square {
-    const [squareColumn, squareRow] = [(squareIndex - squareIndex % this.dimension) / this.dimension, squareIndex % this.dimension];
+    const [squareColumn, squareRow] = [
+      (squareIndex - (squareIndex % this.dimension)) / this.dimension,
+      squareIndex % this.dimension,
+    ];
     const firstLine = squareRow * (this.dimension * 2 + 1) + squareColumn + 1;
-    return [firstLine, firstLine + this.dimension, firstLine + this.dimension + 1, firstLine + this.dimension * 2 + 1];
+    return [
+      firstLine,
+      firstLine + this.dimension,
+      firstLine + this.dimension + 1,
+      firstLine + this.dimension * 2 + 1,
+    ];
   }
 
   getSquareMissingEdges(square: Square): number[] {
-    return square.filter(edge => !this.connectedEdge.some(connectEdge => connectEdge === edge));
+    return square.filter(
+      edge => !this.connectedEdge.some(connectEdge => connectEdge === edge)
+    );
   }
 
   isSquareAvailable(square: Square): boolean {

@@ -3,11 +3,18 @@
  * https://www.codewars.com/kata/path-finder-number-3-the-alpinist
  */
 
-interface Point { altitude: number, distance: number, confirmed: boolean, touched: boolean, row: number, column: number }
+interface Point {
+  altitude: number;
+  distance: number;
+  confirmed: boolean;
+  touched: boolean;
+  row: number;
+  column: number;
+}
 interface Area {
-  points: Point[],
-  priority: Point[],
-  readonly size: number,
+  points: Point[];
+  priority: Point[];
+  readonly size: number;
 }
 
 export function pathFinder(area: string): number {
@@ -15,13 +22,15 @@ export function pathFinder(area: string): number {
   return findShortestPath(
     parsedArea,
     { row: 0, column: 0 },
-    { row: parsedArea.size - 1, column: parsedArea.size - 1 });
+    { row: parsedArea.size - 1, column: parsedArea.size - 1 }
+  );
 }
 
 function findShortestPath(
   area: Area,
-  start: { row: number, column: number },
-  end: { row: number, column: number }): number {
+  start: { row: number; column: number },
+  end: { row: number; column: number }
+): number {
   const startPoint = getPoint(area, start.row, start.column);
   const { priority } = area;
   startPoint.distance = 0;
@@ -30,7 +39,8 @@ function findShortestPath(
     const point = findNextUnconfirmedPoint(area);
     labelAllAdjacentPoints(area, point);
     area.priority = area.priority.filter(
-      pPoint => pPoint.column !== point.column || pPoint.row !== point.row);
+      pPoint => pPoint.column !== point.column || pPoint.row !== point.row
+    );
     point.confirmed = true;
   }
 
@@ -40,25 +50,38 @@ function findShortestPath(
 function findNextUnconfirmedPoint(area: Area): Point {
   let smallestDistance = Number.MAX_SAFE_INTEGER;
   let smallestPoint: Point = null;
-  area.priority.filter(point => point.confirmed === false).forEach(point => {
-    if (point.distance < smallestDistance) {
-      smallestDistance = point.distance;
-      smallestPoint = point;
-    }
-  });
+  area.priority
+    .filter(point => point.confirmed === false)
+    .forEach(point => {
+      if (point.distance < smallestDistance) {
+        smallestDistance = point.distance;
+        smallestPoint = point;
+      }
+    });
 
   return smallestPoint;
 }
 
 function labelAllAdjacentPoints(area: Area, point: Point) {
   const { column, row } = point;
-  const adjacentPointsPos = [[row, column - 1], [row, column + 1], [row - 1, column], [row + 1, column]];
-  const adjacentPoints = adjacentPointsPos.map(([row, column]) => getPoint(area, row, column))
+  const adjacentPointsPos = [
+    [row, column - 1],
+    [row, column + 1],
+    [row - 1, column],
+    [row + 1, column],
+  ];
+  const adjacentPoints = adjacentPointsPos
+    .map(([row, column]) => getPoint(area, row, column))
     .filter(point => !!point && point.confirmed === false);
   adjacentPoints.forEach(adjacentPoint => {
-    const distanceFromCurrentPoint = Math.abs(point.altitude - adjacentPoint.altitude);
+    const distanceFromCurrentPoint = Math.abs(
+      point.altitude - adjacentPoint.altitude
+    );
     const calculatedDistance = distanceFromCurrentPoint + point.distance;
-    adjacentPoint.distance = Math.min(adjacentPoint.distance, calculatedDistance);
+    adjacentPoint.distance = Math.min(
+      adjacentPoint.distance,
+      calculatedDistance
+    );
     if (adjacentPoint.touched === false) {
       area.priority.push(adjacentPoint);
       adjacentPoint.touched = true;
@@ -78,15 +101,15 @@ function getPoint(area: Area, row: number, column: number) {
 function parseArea(area: string): Area {
   const rows = area.split('\n');
   const result = rows.map((row, rowIndex) =>
-    row.split('')
-      .map((altitude, columnIndex) => ({
-        altitude: parseInt(altitude, 10),
-        distance: Number.MAX_SAFE_INTEGER,
-        confirmed: false,
-        column: columnIndex,
-        row: rowIndex,
-        touched: false,
-      })));
+    row.split('').map((altitude, columnIndex) => ({
+      altitude: parseInt(altitude, 10),
+      distance: Number.MAX_SAFE_INTEGER,
+      confirmed: false,
+      column: columnIndex,
+      row: rowIndex,
+      touched: false,
+    }))
+  );
   return {
     points: result.reduce((acc, row) => [...acc, ...row], []),
     size: result.length,

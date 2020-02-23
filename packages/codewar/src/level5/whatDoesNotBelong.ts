@@ -35,7 +35,11 @@ function findUniqFromNumbers(series: number[]): number {
   return [
     findUniqElementBy(series, ele => ele % 2 === 1),
     findUniqElementBy(series, ele => ele > 0),
-    findUniqElementBy(series, ele => series.filter(el => el === ele).length === 1, false),
+    findUniqElementBy(
+      series,
+      ele => series.filter(el => el === ele).length === 1,
+      false
+    ),
   ].find(result => result !== undefined);
 }
 
@@ -44,7 +48,11 @@ function findUniqFromStrings(series: string[]): string {
     findUniqElementBy(series, ele => Number.isNaN(parseInt(ele, 10))),
     findUniqElementBy(series, ele => ele === '.'),
     findUniqElementBy(series, ele => ele === ele.toLowerCase()),
-    findUniqElementBy(series, ele => series.filter(el => el === ele).length === 1, false),
+    findUniqElementBy(
+      series,
+      ele => series.filter(el => el === ele).length === 1,
+      false
+    ),
   ].find(result => result !== undefined);
 }
 
@@ -57,9 +65,15 @@ function findUniqElement(series: Element[]): Element {
   return results.find(result => result !== undefined);
 }
 
-function findUniqElementBy<T>(series: T[], fn: (element: T) => boolean, canRevert = true): T | undefined {
+function findUniqElementBy<T>(
+  series: T[],
+  fn: (element: T) => boolean,
+  canRevert = true
+): T | undefined {
   const matchedElements = series.filter(ele => fn(ele));
   const notMatchedElements = series.filter(ele => canRevert && !fn(ele));
-  const uniqElements = [matchedElements, notMatchedElements].find(elements => elements.length === 1);
+  const uniqElements = [matchedElements, notMatchedElements].find(
+    elements => elements.length === 1
+  );
   return uniqElements ? uniqElements[0] : undefined;
 }

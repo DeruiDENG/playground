@@ -56,7 +56,9 @@ function parseHundreds(string: string): number {
     return parseSmallNumber(comps[0].trim());
   }
 
-  return parseSmallNumber(comps[0].trim()) * 100 + parseSmallNumber(comps[1].trim());
+  return (
+    parseSmallNumber(comps[0].trim()) * 100 + parseSmallNumber(comps[1].trim())
+  );
 }
 
 /**
