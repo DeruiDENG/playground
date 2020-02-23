@@ -4,17 +4,25 @@
  * @return {number[]}
  */
 export const twoSum = function(nums, target) {
-  for (let firstNumIndex = 0; firstNumIndex < nums.length; firstNumIndex++) {
-    const firstNum = nums[firstNumIndex];
-    for (
-      let secondNumIndex = firstNumIndex + 1;
-      secondNumIndex < nums.length;
-      secondNumIndex++
-    ) {
-      const secondNum = nums[secondNumIndex];
-      if (firstNum + secondNum === target) {
-        return [firstNumIndex, secondNumIndex];
+  const numsMap = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
+    numsMap.set(num, [...(numsMap.get(num) ?? []), i]);
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
+    const remainder = target - num;
+    if (remainder < num) {
+      continue;
+    }
+    const remainderIndexs = numsMap.get(remainder);
+    if (num === remainder) {
+      if (remainderIndexs.length === 2) {
+        return remainderIndexs;
       }
+    } else if (remainderIndexs) {
+      return [i, remainderIndexs[0]];
     }
   }
 };
