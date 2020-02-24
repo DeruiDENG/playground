@@ -12,45 +12,30 @@
  * @return {ListNode}
  */
 export const addTwoNumbers = function(l1, l2) {
-  const num1 = listNodeToNumber(l1);
-  const num2 = listNodeToNumber(l2);
-  return numberToListNode(num1 + num2);
-};
+  /**
+   * @type {ListNode}
+   */
+  const result = {
+    val: 0,
+    next: null,
+  };
+  let ptr = result;
+  while (l1 !== null || l2 !== null) {
+    const l1Val = l1 ? l1.val : 0;
+    const l2Val = l2 ? l2.val : 0;
+    const total = ptr.val + l1Val + l2Val;
+    l1 = l1 ? l1.next : l1;
+    l2 = l2 ? l2.next : l2;
 
-/**
- *
- * @param {ListNode} listNode
- * @return {number}
- */
-function listNodeToNumber(listNode) {
-  const numbers = [];
-  while (true) {
-    numbers.push(listNode.val);
-    if (listNode.next === null) {
-      return Number.parseInt(numbers.reverse().join(''), 10);
+    ptr.val = total % 10;
+    if (total >= 10 || l1 || l2) {
+      ptr.next = {
+        val: total >= 10 ? 1 : 0,
+        next: null,
+      };
+      ptr = ptr.next;
     }
-
-    listNode = listNode.next;
-  }
-}
-
-/**
- *
- * @param {number} number
- * @return {ListNode}
- */
-function numberToListNode(number) {
-  const digits = number
-    .toString()
-    .split('')
-    .map(digit => parseInt(digit, 10));
-  let listNode = null;
-  for (const digit of digits) {
-    listNode = {
-      val: digit,
-      next: listNode,
-    };
   }
 
-  return listNode;
-}
+  return result;
+};
