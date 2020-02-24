@@ -1,10 +1,10 @@
 import { undoRedo } from './undoRedo';
 
-describe('undoRedo', function () {
-  it('should get/set works', function () {
+describe('undoRedo', function() {
+  it('should get/set works', function() {
     var obj = {
       x: 1,
-      y: 2
+      y: 2,
     };
     var unRe = undoRedo(obj);
     expect(unRe.get('x')).toBe(1);
@@ -12,10 +12,10 @@ describe('undoRedo', function () {
     expect(unRe.get('x')).toBe(3);
   });
 
-  it('should simple undo works', function () {
+  it('should simple undo works', function() {
     var obj = {
       x: 1,
-      y: 2
+      y: 2,
     };
     var unRe = undoRedo(obj);
     unRe.set('y', 10);
@@ -29,10 +29,10 @@ describe('undoRedo', function () {
     }
   });
 
-  it('should simple redo works', function () {
+  it('should simple redo works', function() {
     var obj = {
       x: 1,
-      y: 2
+      y: 2,
     };
 
     var unRe = undoRedo(obj);
@@ -50,10 +50,10 @@ describe('undoRedo', function () {
     }
   });
 
-  it('should chained get/set/undo/redo works', function () {
+  it('should chained get/set/undo/redo works', function() {
     var obj = {
       x: 1,
-      y: 2
+      y: 2,
     };
 
     var unRe = undoRedo(obj);
@@ -90,18 +90,18 @@ describe('undoRedo', function () {
     unRe.redo();
     expect(unRe.get('x')).toBe(50);
     expect(unRe.get('y')).toBe(100);
-    try{
+    try {
       unRe.redo();
-    }catch (e) {
+    } catch (e) {
       expect(unRe.get('x')).toBe(50);
       expect(unRe.get('y')).toBe(100);
     }
   });
 
-  it('should new key works', function () {
+  it('should new key works', function() {
     var obj = {
       x: 1,
-      y: 2
+      y: 2,
     };
 
     var unRe = undoRedo(obj);
@@ -113,10 +113,10 @@ describe('undoRedo', function () {
     expect(unRe.get('z')).toBe(10);
   });
 
-  it('should delete works', function () {
+  it('should delete works', function() {
     var obj = {
       x: 1,
-      y: 2
+      y: 2,
     };
 
     var unRe = undoRedo(obj);

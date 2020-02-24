@@ -5,7 +5,7 @@
 import { findPrimes } from '../utils/integers';
 
 export class G964 {
-    public static sumOfDivided(lst: number[]): number[][] {
+  public static sumOfDivided(lst: number[]): number[][] {
     const list: number[][] = [];
     const max = Math.max(...lst.map(value => Math.abs(value)));
     const primes = findPrimes(max);

@@ -3,6 +3,7 @@
     "strict": true,
     "module": "commonjs",
     "target": "ES6",
+    "allowJs": true,
     "lib": [
       "dom",
       "dom.iterable",

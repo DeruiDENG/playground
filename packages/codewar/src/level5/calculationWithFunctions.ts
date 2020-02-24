@@ -3,7 +3,7 @@
  * https://www.codewars.com/kata/calculating-with-functions/train/javascript
  */
 
-const generateBaseFunction = (base: number) => (operator) => {
+const generateBaseFunction = (base: number) => operator => {
   if (operator) {
     return operator(base);
   }
@@ -17,7 +17,6 @@ export function zero(operator) {
 
 export function one(operator) {
   return generateBaseFunction(1)(operator);
-
 }
 
 export function two(operator) {
@@ -53,15 +52,15 @@ export function nine(operator) {
 }
 
 export function plus(secondOperand) {
-  return firstOperand => (secondOperand + firstOperand);
+  return firstOperand => secondOperand + firstOperand;
 }
 
 export function minus(secondOperand) {
-  return firstOperand => (firstOperand - secondOperand);
+  return firstOperand => firstOperand - secondOperand;
 }
 
 export function times(secondOperand) {
-  return firstOperand => (firstOperand * secondOperand);
+  return firstOperand => firstOperand * secondOperand;
 }
 
 export function dividedBy(secondOperand) {

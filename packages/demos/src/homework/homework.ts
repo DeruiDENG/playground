@@ -17,7 +17,9 @@ export const main = async () => {
   const maze = new Maze(dimension.x, dimension.y);
   maze.print();
 
-  const connectivityInput = await promptInput('Please input the connectivity(0,1 0,2;1,1 1,2): ');
+  const connectivityInput = await promptInput(
+    'Please input the connectivity(0,1 0,2;1,1 1,2): '
+  );
   const connectivity = parseConnectivityInput(connectivityInput);
   if (connectivity === false) {
     console.log('Connectivity is invalid');

@@ -1,15 +1,13 @@
 import { pathFinder } from './pathFinderThree';
 
-describe('pathFinderThree', function () {
-  it('should pass simple test', function () {
-    let areaInput =
-      `000
+describe('pathFinderThree', function() {
+  it('should pass simple test', function() {
+    let areaInput = `000
 000
 000`;
     expect(pathFinder(areaInput)).toBe(0);
 
-    areaInput =
-      `777000
+    areaInput = `777000
 007000
 007000
 007000
@@ -17,8 +15,7 @@ describe('pathFinderThree', function () {
 007777`;
     expect(pathFinder(areaInput)).toBe(0);
 
-    areaInput =
-`777777
+    areaInput = `777777
 000007
 007777
 007000

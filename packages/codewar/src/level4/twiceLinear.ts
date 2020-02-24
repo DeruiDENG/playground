@@ -6,7 +6,10 @@ const getDoubleLinear = (n: number): [number, number] => {
   return [2 * n + 1, 3 * n + 1];
 };
 
-const mergeSortedArray = (sortedArray1: number[], sortedArray2: number[]): number[] => {
+const mergeSortedArray = (
+  sortedArray1: number[],
+  sortedArray2: number[]
+): number[] => {
   let sortedResult: number[] = [];
   let pointer1 = 0;
   let pointer2 = 0;
@@ -38,9 +41,10 @@ export class G964 {
     let pointerOne = 1;
     let pointerTwo = 0;
     while (pointerOne < n) {
-      let base = sequenceOne[pointerOne] < sequenceTwo[pointerTwo] ?
-        sequenceOne[pointerOne++] :
-        sequenceTwo[pointerTwo++];
+      let base =
+        sequenceOne[pointerOne] < sequenceTwo[pointerTwo]
+          ? sequenceOne[pointerOne++]
+          : sequenceTwo[pointerTwo++];
       const [num1, num2] = getDoubleLinear(base);
       sequenceOne.push(num1);
       sequenceTwo.push(num2);

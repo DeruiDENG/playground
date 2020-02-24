@@ -1,7 +1,7 @@
 import { findAll } from './howManyNumbers';
 
-describe('Example Tests', function () {
-  it('Simple Cases', function () {
+describe('Example Tests', function() {
+  it('Simple Cases', function() {
     expect(findAll(10, 3)).toEqual([8, '118', '334']);
     expect(findAll(27, 3)).toEqual([1, '999', '999']);
     expect(findAll(84, 4)).toEqual([]);

@@ -1,9 +1,9 @@
 // Union types
 interface PricePointProps {
-  amount: number,
-  color: 'orange' | 'black',
+  amount: number;
+  color: 'orange' | 'black';
   size: 'small' | 'large' | 300 | 500 | 700;
-  currencyCode?: string
+  currencyCode?: string;
 }
 
 const pricePointProps: PricePointProps = {
@@ -17,7 +17,6 @@ const pricePointProps: PricePointProps = {
 type Result =
   | { success: true; response: string }
   | { success: false; error: string };
-
 
 const result1: Result = { success: true, response: 'DOT' };
 const result2: Result = { success: false, error: 'Error text' };
@@ -38,6 +37,6 @@ const retrieveDataFromBackend = (): Promise<{ versionNumber: number }> => {
   return Promise.resolve({ versionNumber: 5 });
 };
 
-retrieveDataFromBackend()
-  .then(({ versionNumber }) => console.log(`Version number is ${versionNumber}`));
-
+retrieveDataFromBackend().then(({ versionNumber }) =>
+  console.log(`Version number is ${versionNumber}`)
+);

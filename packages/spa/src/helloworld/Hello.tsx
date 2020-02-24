@@ -2,7 +2,7 @@ import * as React from 'react';
 import './hello.scss';
 
 export interface HelloProps {
-  name: string
+  name: string;
 }
 
 // 'HelloProps' describes the shape of props.

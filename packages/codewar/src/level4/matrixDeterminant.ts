@@ -14,14 +14,17 @@ export function determinant(m: number[][]): number {
 
   let total = 0;
   for (let columnIndex = 0; columnIndex < m[0].length; columnIndex++) {
-    total += determinant(getSubMatrix(m, columnIndex))
-      * m[0][columnIndex] * (columnIndex % 2 * (-2) + 1);
+    total +=
+      determinant(getSubMatrix(m, columnIndex)) *
+      m[0][columnIndex] *
+      ((columnIndex % 2) * -2 + 1);
   }
 
   return total;
 }
 
 export function getSubMatrix(m: number[][], column: number): number[][] {
-  return m.filter((row, index) => index !== 0)
+  return m
+    .filter((row, index) => index !== 0)
     .map(row => row.filter((element, index) => index !== column));
 }

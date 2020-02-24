@@ -16,9 +16,9 @@ export function calc(expression: string | number): number {
 
   expression = expression.replace(/\s/g, '');
   while (InnerMostParenthesesRegex.test(expression)) {
-    expression = expression.replace(
-      InnerMostParenthesesRegex,
-      substring => calcPure(removeParentheses(substring)).toString());
+    expression = expression.replace(InnerMostParenthesesRegex, substring =>
+      calcPure(removeParentheses(substring)).toString()
+    );
   }
   return calcPure(expression);
 }
@@ -43,9 +43,14 @@ function calcPure(expression: string): number {
     return calcPure(separatedByMinus[0]) - calcPure(separatedByMinus[1]);
   }
 
-  const separatedByMultiplication = expression.split(LastBinaryMultiplicationRegex);
+  const separatedByMultiplication = expression.split(
+    LastBinaryMultiplicationRegex
+  );
   if (separatedByMultiplication.length === 2) {
-    return calcPure(separatedByMultiplication[0]) * calcPure(separatedByMultiplication[1]);
+    return (
+      calcPure(separatedByMultiplication[0]) *
+      calcPure(separatedByMultiplication[1])
+    );
   }
 
   const separatedByDivision = expression.split(LastBinaryDivisionRegex);

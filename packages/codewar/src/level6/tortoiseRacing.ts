@@ -38,6 +38,8 @@ export class G964 {
 function convertSecondsToBreakdown(seconds: number): [number, number, number] {
   const formattedHour = Math.floor(seconds / 3600);
   const formattedMinutes = Math.floor((seconds - formattedHour * 3600) / 60);
-  const formattedSeconds = Math.floor(seconds - formattedHour * 3600 - formattedMinutes * 60);
+  const formattedSeconds = Math.floor(
+    seconds - formattedHour * 3600 - formattedMinutes * 60
+  );
   return [formattedHour, formattedMinutes, formattedSeconds];
 }

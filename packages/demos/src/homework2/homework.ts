@@ -7,9 +7,11 @@ const isLineLengthInvalid = (lineLength: number) => {
     max: 80,
   };
 
-  return !Number.isInteger(lineLength)
-    || lineLength <= lengthRange.min
-    || lineLength > lengthRange.max;
+  return (
+    !Number.isInteger(lineLength) ||
+    lineLength <= lengthRange.min ||
+    lineLength > lengthRange.max
+  );
 };
 
 const main = async () => {

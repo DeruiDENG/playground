@@ -1,7 +1,7 @@
 import { sum } from './explosiveSum';
 
-describe('explosiveSum', function () {
-  it('should pass sample tests', function () {
+describe('explosiveSum', function() {
+  it('should pass sample tests', function() {
     expect(sum(1)).toBe(1);
     expect(sum(2)).toBe(2);
     expect(sum(3)).toBe(3);

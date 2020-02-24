@@ -13,8 +13,10 @@ export class G964 {
     for (let i = 1; i < arr.length; i++) {
       const prevElement = arr[i - 1];
       const currentElement = arr[i];
-      if (kPrimes.some(kPrime => kPrime === prevElement) && kPrimes.some(
-        kPrimes => kPrimes === currentElement)) {
+      if (
+        kPrimes.some(kPrime => kPrime === prevElement) &&
+        kPrimes.some(kPrimes => kPrimes === currentElement)
+      ) {
         counter++;
       }
     }
@@ -30,12 +32,14 @@ function getKprimes(k: number, start: number, nd: number): number[] {
 
 function findPrimeK(num: number, primes: number[]): number {
   let k = 1;
-  primes.filter(prime => prime <= Math.sqrt(num)).forEach(prime => {
-    while (num % prime === 0 && num !== prime) {
-      num /= prime;
-      k++;
-    }
-  });
+  primes
+    .filter(prime => prime <= Math.sqrt(num))
+    .forEach(prime => {
+      while (num % prime === 0 && num !== prime) {
+        num /= prime;
+        k++;
+      }
+    });
 
   return k;
 }
@@ -44,7 +48,9 @@ function findPrimes(max: number): number[] {
   const primes = [2];
   const maxSqrt = Math.sqrt(max);
   for (let i = 3; i <= max; i += 2) {
-    if (primes.filter(prime => prime <= maxSqrt && i % prime === 0).length === 0) {
+    if (
+      primes.filter(prime => prime <= maxSqrt && i % prime === 0).length === 0
+    ) {
       primes.push(i);
     }
   }

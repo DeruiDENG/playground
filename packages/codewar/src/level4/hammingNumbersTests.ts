@@ -1,7 +1,7 @@
 import { hamming } from './hammingNumbers';
 
-describe('hammingNumbers', function () {
-  it('should work', function () {
+describe('hammingNumbers', function() {
+  it('should work', function() {
     expect(hamming(1)).toBe(1);
     expect(hamming(2)).toBe(2);
     expect(hamming(3)).toBe(3);

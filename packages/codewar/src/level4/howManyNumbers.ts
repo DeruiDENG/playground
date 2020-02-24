@@ -13,8 +13,11 @@ export function findAll(n: number, k: number): [number, string, string] | [] {
   const availableNumbers = findAvailableNumbers(n, k, 9);
   if (availableNumbers.length) {
     console.log(availableNumbers);
-    return [availableNumbers.length, Math.min(...availableNumbers)
-      .toString(), Math.max(...availableNumbers).toString()];
+    return [
+      availableNumbers.length,
+      Math.min(...availableNumbers).toString(),
+      Math.max(...availableNumbers).toString(),
+    ];
   }
 
   return [];
@@ -23,7 +26,8 @@ export function findAll(n: number, k: number): [number, string, string] | [] {
 export function findAvailableNumbers(
   digitSum: number,
   numDigit: number,
-  allowedDigit: number): number[] {
+  allowedDigit: number
+): number[] {
   if (numDigit === 1) {
     if (digitSum > 10 || digitSum > allowedDigit) {
       return [];
@@ -35,9 +39,19 @@ export function findAvailableNumbers(
   const maxLastDigit = Math.min(digitSum - numDigit + 1, 9, allowedDigit);
   const lowestLastDigit = Math.ceil(digitSum / numDigit);
   let results: number[] = [];
-  for (let lastDigit = lowestLastDigit; lastDigit <= maxLastDigit; lastDigit++) {
-    const subNumbers = findAvailableNumbers(digitSum - lastDigit, numDigit - 1, lastDigit);
-    results.push(...subNumbers.map(subNumber => mergeNumber(subNumber, lastDigit)));
+  for (
+    let lastDigit = lowestLastDigit;
+    lastDigit <= maxLastDigit;
+    lastDigit++
+  ) {
+    const subNumbers = findAvailableNumbers(
+      digitSum - lastDigit,
+      numDigit - 1,
+      lastDigit
+    );
+    results.push(
+      ...subNumbers.map(subNumber => mergeNumber(subNumber, lastDigit))
+    );
   }
 
   return results;

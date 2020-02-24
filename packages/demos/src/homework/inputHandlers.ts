@@ -12,17 +12,17 @@ export const promptInput = (promptMessage: string) => {
     output: process.stdout,
   });
 
-  return new Promise<string>(
-    (resolve) => {
-      rl.question(promptMessage, (answer) => {
-        rl.close();
-        resolve(answer);
-      });
-    },
-  );
+  return new Promise<string>(resolve => {
+    rl.question(promptMessage, answer => {
+      rl.close();
+      resolve(answer);
+    });
+  });
 };
 
-export const parseDimensionInput = (dimensionInput: string): Dimension | false => {
+export const parseDimensionInput = (
+  dimensionInput: string
+): Dimension | false => {
   const splitInput = dimensionInput.split(' ');
   if (splitInput.length !== 2) {
     return false;
@@ -40,7 +40,9 @@ export const parseDimensionInput = (dimensionInput: string): Dimension | false =
   return false;
 };
 
-export const parseConnectivityInput = (connectivityInput: string): false | ConnectivityInfo[] => {
+export const parseConnectivityInput = (
+  connectivityInput: string
+): false | ConnectivityInfo[] => {
   const connectivityItems = connectivityInput.split(';');
   if (connectivityItems.length === 0) {
     return false;
@@ -54,9 +56,12 @@ export const parseConnectivityInput = (connectivityInput: string): false | Conne
     }
     const startDims = startAndEnd[0].split(',');
     const endDims = startAndEnd[1].split(',');
-    if (startDims.length !== 2 || endDims.length !== 2 || startDims.some(
-      x => !Number.isInteger(Number.parseInt(x, 10))) ||
-      endDims.some(x => !Number.isInteger(Number.parseInt(x, 10)))) {
+    if (
+      startDims.length !== 2 ||
+      endDims.length !== 2 ||
+      startDims.some(x => !Number.isInteger(Number.parseInt(x, 10))) ||
+      endDims.some(x => !Number.isInteger(Number.parseInt(x, 10)))
+    ) {
       return false;
     }
 
@@ -94,9 +99,13 @@ const parseRobotPosition = (posInput: string): Dimension | false => {
   };
 };
 
-const isDirectionValid =
-  (direction: string): direction is 'W' | 'A' | 'S' | 'D' =>
-    (direction === 'W' || direction === 'A' || direction === 'S' || direction === 'D');
+const isDirectionValid = (
+  direction: string
+): direction is 'W' | 'A' | 'S' | 'D' =>
+  direction === 'W' ||
+  direction === 'A' ||
+  direction === 'S' ||
+  direction === 'D';
 
 const parseCount = (count: string): number | false => {
   const parsedCount = Number.parseInt(count, 10);
@@ -123,31 +132,31 @@ const parseRobotCommands = (commandInput: string): RobotCommand[] | false => {
     } else {
       return false;
     }
-
   }
 
   return commands;
 };
 
-export const parseRobotInput =
-  (robotInput: string): { dimension: Dimension, commands: RobotCommand[] } | false => {
-    const posAndCommand = robotInput.split(' ');
-    if (posAndCommand.length !== 2) {
-      return false;
-    }
+export const parseRobotInput = (
+  robotInput: string
+): { dimension: Dimension; commands: RobotCommand[] } | false => {
+  const posAndCommand = robotInput.split(' ');
+  if (posAndCommand.length !== 2) {
+    return false;
+  }
 
-    const robotPosition = parseRobotPosition(posAndCommand[0]);
-    if (robotPosition === false) {
-      return false;
-    }
+  const robotPosition = parseRobotPosition(posAndCommand[0]);
+  if (robotPosition === false) {
+    return false;
+  }
 
-    const robotCommands = parseRobotCommands(posAndCommand[1]);
-    if (robotCommands === false) {
-      return false;
-    }
+  const robotCommands = parseRobotCommands(posAndCommand[1]);
+  if (robotCommands === false) {
+    return false;
+  }
 
-    return {
-      dimension: robotPosition,
-      commands: robotCommands,
-    };
+  return {
+    dimension: robotPosition,
+    commands: robotCommands,
   };
+};

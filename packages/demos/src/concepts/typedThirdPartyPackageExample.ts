@@ -19,16 +19,19 @@ const passengerInfos = [
   },
 ];
 
-const passengersInfoWithHobby = _.map(selectedPassengerNumbers, (passengerNumber) => {
-  const passengerInfo = _.find(passengerInfos, { passengerNumber });
-  if (!passengerInfo) {
-    return [];
-  }
+const passengersInfoWithHobby = _.map(
+  selectedPassengerNumbers,
+  passengerNumber => {
+    const passengerInfo = _.find(passengerInfos, { passengerNumber });
+    if (!passengerInfo) {
+      return [];
+    }
 
-  return _.map(passengerInfo.hobby, hobby => ({
-    hobby,
-    name: passengerInfo.name,
-  }));
-});
+    return _.map(passengerInfo.hobby, hobby => ({
+      hobby,
+      name: passengerInfo.name,
+    }));
+  }
+);
 
 const passengersHobby = _.flatten(passengersInfoWithHobby);

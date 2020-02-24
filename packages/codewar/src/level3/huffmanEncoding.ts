@@ -5,17 +5,17 @@
 
 type Frequency = [string, number];
 interface HuffmanChunk {
-  type: 'chunk',
-  frequency: number,
-  leftLeaf: HuffmanChunk | HuffmanLeave,
-  rightLeaf: HuffmanChunk | HuffmanLeave
+  type: 'chunk';
+  frequency: number;
+  leftLeaf: HuffmanChunk | HuffmanLeave;
+  rightLeaf: HuffmanChunk | HuffmanLeave;
 }
 interface HuffmanLeave {
-  type: 'leave',
-  char: string,
-  frequency: number,
+  type: 'leave';
+  char: string;
+  frequency: number;
 }
-type HuffmanRoot = HuffmanChunk | HuffmanLeave
+type HuffmanRoot = HuffmanChunk | HuffmanLeave;
 
 // takes: String; returns: [ [String,Int] ] (Strings in return value are single characters)
 export function frequencies(s: string): Frequency[] {
@@ -32,11 +32,13 @@ export function frequencies(s: string): Frequency[] {
 }
 
 function buildHuffmanTree(frequencies: Frequency[]): HuffmanRoot {
-  let labeledFrequencies: HuffmanRoot[] = frequencies.map(([char, frequency]): HuffmanLeave => ({
-    frequency,
-    char,
-    type: 'leave'
-  }));
+  let labeledFrequencies: HuffmanRoot[] = frequencies.map(
+    ([char, frequency]): HuffmanLeave => ({
+      frequency,
+      char,
+      type: 'leave',
+    })
+  );
   if (labeledFrequencies.length === 0) {
     return null;
   }
@@ -49,11 +51,15 @@ function buildHuffmanTree(frequencies: Frequency[]): HuffmanRoot {
   while (sortedFrequencies.length > 1) {
     const newElement: HuffmanChunk = {
       type: 'chunk',
-      frequency: sortedFrequencies[0].frequency + sortedFrequencies[1].frequency,
+      frequency:
+        sortedFrequencies[0].frequency + sortedFrequencies[1].frequency,
       leftLeaf: sortedFrequencies[0],
-      rightLeaf: sortedFrequencies[1]
+      rightLeaf: sortedFrequencies[1],
     };
-    sortedFrequencies = sortFrequencies([...sortedFrequencies.slice(2), newElement]);
+    sortedFrequencies = sortFrequencies([
+      ...sortedFrequencies.slice(2),
+      newElement,
+    ]);
   }
 
   return sortedFrequencies[0];
@@ -76,7 +82,11 @@ function buildDictionary(frequencies: Frequency[]) {
   return dictionary;
 }
 
-function buildDictionaryRecursive(dictionary: any, acc: string, treeNode: HuffmanRoot) {
+function buildDictionaryRecursive(
+  dictionary: any,
+  acc: string,
+  treeNode: HuffmanRoot
+) {
   if (treeNode.type === 'chunk') {
     buildDictionaryRecursive(dictionary, `${acc}0`, treeNode.leftLeaf);
     buildDictionaryRecursive(dictionary, `${acc}1`, treeNode.rightLeaf);
@@ -88,11 +98,15 @@ function buildDictionaryRecursive(dictionary: any, acc: string, treeNode: Huffma
 
 function sortFrequencies(frequencies: HuffmanRoot[]): HuffmanRoot[] {
   return [...frequencies].sort(
-    (frequency1, frequency2) => frequency1.frequency - frequency2.frequency);
+    (frequency1, frequency2) => frequency1.frequency - frequency2.frequency
+  );
 }
 
 function encodeUsingDictionary(s: string, dictionary: any) {
-  return s.split('').map((char): string => dictionary[char]).join('');
+  return s
+    .split('')
+    .map((char): string => dictionary[char])
+    .join('');
 }
 
 export function encode(freqs: Frequency[], s: string) {
@@ -119,7 +133,10 @@ export function decode(freqs: Frequency[], bits: string): string {
   }
 
   if (huffmanTree.type === 'leave') {
-    return bits.split('').map(() => huffmanTree.char).join('');
+    return bits
+      .split('')
+      .map(() => huffmanTree.char)
+      .join('');
   }
 
   let huffmanTreePointer = huffmanTree;

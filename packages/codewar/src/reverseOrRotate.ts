@@ -72,4 +72,3 @@ export class G964 {
     return str.split('');
   }
 }
-

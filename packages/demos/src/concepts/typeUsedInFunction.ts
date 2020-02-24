@@ -6,12 +6,11 @@ const multiply = (valueA: number, valueB: number, valueC?: number): number => {
   return valueA * valueB;
 };
 
-const multiplyResult = multiply(5, 6);  // 30
-multiply(5, 6, 2);  // 60
+const multiplyResult = multiply(5, 6); // 30
+multiply(5, 6, 2); // 60
 // multiply('2', 4);  // Compile time error
 
-
-const getUserName = (user: { userName: string, age: number }): string => {
+const getUserName = (user: { userName: string; age: number }): string => {
   return user.userName;
 };
 

@@ -10,7 +10,7 @@ homeworkMain();
  * @param {string=>boolean} predicate
  * @returns {string[]} the new filtered array.
  */
-function filter(collection, predicate){
+function filter(collection, predicate) {
   // ...
 }
 
@@ -38,4 +38,4 @@ function filter(collection, predicate){
 const initialState = {
   isLoggedIn: true,
   profile: null,
-}
+};

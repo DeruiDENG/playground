@@ -14,4 +14,3 @@ export const dashatize = (num: number): string => {
     .replace(/--/g, '-')
     .replace(/(^-|-$)/g, '');
 };
-

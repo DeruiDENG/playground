@@ -9,11 +9,11 @@ export function formatDuration(seconds: number): string {
 }
 
 interface TimeBreakdown {
-  secondSection: number,
-  minuteSection: number,
-  hourSection: number,
-  daySection: number,
-  yearSection: number,
+  secondSection: number;
+  minuteSection: number;
+  hourSection: number;
+  daySection: number;
+  yearSection: number;
 }
 
 function parseTimeBreakdown(seconds: number): TimeBreakdown {
@@ -40,15 +40,15 @@ function printTimeBreakdown(breakdown: TimeBreakdown): string {
     minuteSection,
     hourSection,
     daySection,
-    yearSection
+    yearSection,
   } = breakdown;
   const formattedBreakdown = [
     format(yearSection, 'year'),
     format(daySection, 'day'),
     format(hourSection, 'hour'),
     format(minuteSection, 'minute'),
-    format(secondSection, 'second')]
-    .filter(str => str !== '');
+    format(secondSection, 'second'),
+  ].filter(str => str !== '');
   if (formattedBreakdown.length === 0) {
     return 'now';
   }

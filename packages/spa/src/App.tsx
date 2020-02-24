@@ -11,17 +11,15 @@ const App = () => {
       <div>
         <Catalog />
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={Hello}
-          />
+          <Route exact path="/" component={Hello} />
           <Route
             path="/message"
-            render={() => <SimpleMessage
-              title={'Title of simple message'}
-              description={'Description blablablabla'}
-            />}
+            render={() => (
+              <SimpleMessage
+                title={'Title of simple message'}
+                description={'Description blablablabla'}
+              />
+            )}
           />
         </Switch>
       </div>
