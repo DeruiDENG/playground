@@ -1,5 +1,5 @@
 // @ts-check
-import { addTwoNumbers } from './question';
+import { addTwoNumbers } from './q2';
 
 describe('quesitons', () => {
   it('should work', () => {
@@ -26,7 +26,7 @@ describe('quesitons', () => {
 /**
  *
  * @param {number[]} inputs
- * @return {import('./question').ListNode}
+ * @return {import('./q2').ListNode}
  */
 function buildListNodeFromTestCase(inputs) {
   let nodeList = null;

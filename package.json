@@ -18,7 +18,8 @@
   },
   "scripts": {
     "test": "lerna run test --parallel",
-    "lint": "lerna run lint --parallel"
+    "lint": "lerna run lint --parallel",
+    "ci": "yarn lint"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
