@@ -21,4 +21,11 @@ describe('q3', () => {
     const result = lengthOfLongestSubstring(testCase);
     expect(result).toBe(expected);
   });
+
+  it('should work for ` `', () => {
+    const testCase = ' ';
+    const expected = 1;
+    const result = lengthOfLongestSubstring(testCase);
+    expect(result).toBe(expected);
+  });
 });
