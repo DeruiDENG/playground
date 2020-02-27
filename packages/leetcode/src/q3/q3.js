@@ -5,27 +5,21 @@
  * @return {number}
  */
 export const lengthOfLongestSubstring = function(s) {
+  const chars = s.split('');
   let startIndex = 0;
   let endIndex = 0;
-  while (endIndex < s.length) {
-    const subString = s.slice(startIndex, endIndex + 1);
-    if (isContainingDuplicateChar(subString)) {
-      endIndex++;
+  let answer = 0;
+  const charsMap = new Map();
+  while (endIndex < chars.length) {
+    if (charsMap.has(chars[endIndex])) {
+      charsMap.delete(chars[startIndex]);
       startIndex++;
     } else {
+      charsMap.set(chars[endIndex], chars[endIndex]);
       endIndex++;
+      answer = Math.max(answer, endIndex - startIndex);
     }
   }
 
-  return endIndex - startIndex;
+  return answer;
 };
-
-/**
- *
- * @param {string} s
- */
-function isContainingDuplicateChar(s) {
-  const chars = s.split('');
-  const set = new Set(chars);
-  return set.size !== chars.length;
-}
