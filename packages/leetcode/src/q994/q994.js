@@ -55,16 +55,24 @@ export const orangesRotting = function(grid) {
  * @return {{row:number, column:number}[]}
  */
 function getNearByFreshItemsPos(grid, rowIndex, columnIndex) {
-  return [
-    [rowIndex - 1, columnIndex],
-    [rowIndex + 1, columnIndex],
-    [rowIndex, columnIndex - 1],
-    [rowIndex, columnIndex + 1],
-  ]
-    .filter(
-      ([row, column]) =>
-        row >= 0 && row < grid.length && column >= 0 && column < grid[0].length
-    )
-    .filter(([row, column]) => grid[row][column] === FRESH)
-    .map(([row, column]) => ({ row, column }));
+  const pos = [];
+  if (rowIndex - 1 >= 0 && grid[rowIndex - 1][columnIndex] === FRESH) {
+    pos.push({ row: rowIndex - 1, column: columnIndex });
+  }
+  if (rowIndex + 1 < grid.length && grid[rowIndex + 1][columnIndex] === FRESH) {
+    pos.push({ row: rowIndex + 1, column: columnIndex });
+  }
+
+  if (columnIndex - 1 >= 0 && grid[rowIndex][columnIndex - 1] === FRESH) {
+    pos.push({ row: rowIndex, column: columnIndex - 1 });
+  }
+
+  if (
+    columnIndex + 1 < grid[0].length &&
+    grid[rowIndex][columnIndex + 1] === FRESH
+  ) {
+    pos.push({ row: rowIndex, column: columnIndex + 1 });
+  }
+
+  return pos;
 }
