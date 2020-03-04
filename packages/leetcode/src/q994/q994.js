@@ -1,41 +1,50 @@
+// @ts-check
+
 const FRESH = 1;
 const ROTTED = 2;
-const NEWLY_ROTTED = 3;
 /**
  * @param {number[][]} grid
  * @return {number}
  */
 export const orangesRotting = function(grid) {
-  let minuteCounter = 0;
-  while (true) {
-    let hasNewRotted = false;
-    for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
-      for (let columnIndex = 0; columnIndex < grid[0].length; columnIndex++) {
-        if (
-          grid[rowIndex][columnIndex] === FRESH &&
-          hasRottedNearBy(grid, rowIndex, columnIndex)
-        ) {
-          grid[rowIndex][columnIndex] = NEWLY_ROTTED;
-          hasNewRotted = true;
-        }
+  const numColumn = grid[0].length;
+
+  const queueIndexes = []
+    .concat(...grid)
+    .map((val, index) => ({ val, index }))
+    .filter(ele => ele.val === ROTTED)
+    .map(({ index }) => index);
+  /**
+   *
+   * @type {Map<number, number>} <index, depth>
+   */
+  const depthMap = new Map(queueIndexes.map(index => [index, 0]));
+  let depth = 0;
+  while (queueIndexes.length) {
+    const index = queueIndexes.pop();
+    const columnIndex = index % numColumn;
+    const rowIndex = (index - columnIndex) / numColumn;
+    depth = depthMap.get(index);
+    const nearByFreshItemsPositions = getNearByFreshItemsPos(
+      grid,
+      rowIndex,
+      columnIndex
+    );
+    for (const { row, column } of nearByFreshItemsPositions) {
+      const index = row * numColumn + column;
+      if (depthMap.get(index) === undefined) {
+        queueIndexes.unshift(index);
+        grid[row][column] = ROTTED;
+        depthMap.set(index, depth + 1);
       }
     }
-
-    if (!hasNewRotted) {
-      break;
-    }
-
-    minuteCounter++;
-    grid = grid.map(row =>
-      row.map(ele => (ele === NEWLY_ROTTED ? ROTTED : ele))
-    );
   }
 
   if (grid.some(row => row.some(ele => ele === FRESH))) {
     return -1;
   }
 
-  return minuteCounter;
+  return depth;
 };
 
 /**
@@ -43,9 +52,9 @@ export const orangesRotting = function(grid) {
  * @param {number[][]} grid
  * @param {number} rowIndex
  * @param {number} columnIndex
- * @return {boolean}
+ * @return {{row:number, column:number}[]}
  */
-function hasRottedNearBy(grid, rowIndex, columnIndex) {
+function getNearByFreshItemsPos(grid, rowIndex, columnIndex) {
   return [
     [rowIndex - 1, columnIndex],
     [rowIndex + 1, columnIndex],
@@ -56,5 +65,6 @@ function hasRottedNearBy(grid, rowIndex, columnIndex) {
       ([row, column]) =>
         row >= 0 && row < grid.length && column >= 0 && column < grid[0].length
     )
-    .some(([row, column]) => grid[row][column] === ROTTED);
+    .filter(([row, column]) => grid[row][column] === FRESH)
+    .map(([row, column]) => ({ row, column }));
 }
