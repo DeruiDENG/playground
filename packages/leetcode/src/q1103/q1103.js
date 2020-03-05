@@ -5,32 +5,18 @@
  * @return {number[]}
  */
 export const distributeCandies = function(candies, num_people) {
-  let result = Array(num_people).fill(0);
-  let turn = 0;
-  const candiesNeededForFirstTurn = ((1 + num_people) * num_people) / 2;
+  const result = Array(num_people).fill(0);
+  let distributionCount = 0;
   while (true) {
-    const candiesForFullTurn =
-      candiesNeededForFirstTurn + turn * num_people * num_people;
-    if (candies < candiesForFullTurn) {
-      break;
-    }
-    candies -= candiesForFullTurn;
-    result = result.map(
-      (item, index) =>
-        ((index + 1 + index + 1 + turn * num_people) * (turn + 1)) / 2
-    );
-    turn += 1;
-  }
-
-  // Assign one by one
-  for (let i = 0; i < num_people; i++) {
-    const candyToDistribute = i + 1 + turn * num_people;
+    const peopleToDistributeIndex = distributionCount % num_people;
+    const candyToDistribute = distributionCount + 1;
     if (candies < candyToDistribute) {
-      result[i] = result[i] + candies;
+      result[peopleToDistributeIndex] += candies;
       break;
     } else {
-      result[i] = result[i] + candyToDistribute;
+      result[peopleToDistributeIndex] += candyToDistribute;
       candies -= candyToDistribute;
+      distributionCount++;
     }
   }
 
