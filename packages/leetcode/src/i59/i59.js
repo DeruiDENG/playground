@@ -41,11 +41,10 @@ MaxQueue.prototype.push_back = function(value) {
  * @return {number}
  */
 MaxQueue.prototype.pop_front = function() {
-  const removedValue = this.fullQueue.shift();
-  if (removedValue === undefined) {
+  if (!this.fullQueue.length) {
     return -1;
   }
-
+  const removedValue = this.fullQueue.shift();
   if (removedValue === this.orderedQueue[0]) {
     this.orderedQueue.shift();
   }
