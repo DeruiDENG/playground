@@ -16,4 +16,12 @@ describe('q6', () => {
     const result = convert(s, numRows);
     expect(result).toBe(expected);
   });
+
+  it('should work for `A row 1`', () => {
+    const s = 'A',
+      numRows = 1;
+    const expected = 'A';
+    const result = convert(s, numRows);
+    expect(result).toBe(expected);
+  });
 });
