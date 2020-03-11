@@ -24,26 +24,24 @@ export const diameterOfBinaryTree = function(root) {
   if (!root) {
     return 0;
   }
-  updateNodeWithLongestDistanceToNode(root);
+  updateWithLongestPathPassingNode(root);
   return root.longest;
 };
 
 /**
  *
  * @param {TreeNode} node
- * @return {number} - longest distance to leaf
+ * @return {number} - depth, which is the longest distance from current node to leaf
  */
-function updateNodeWithLongestDistanceToNode(node) {
+function updateWithLongestPathPassingNode(node) {
   const { left, right } = node;
-  const leftDistance = left ? updateNodeWithLongestDistanceToNode(left) + 1 : 0;
-  const rightDistance = right
-    ? updateNodeWithLongestDistanceToNode(right) + 1
-    : 0;
-  const longestPathToLeaf = Math.max(leftDistance, rightDistance);
+  const leftDepth = left ? updateWithLongestPathPassingNode(left) + 1 : 0;
+  const rightDepth = right ? updateWithLongestPathPassingNode(right) + 1 : 0;
+  const currentNodeDepth = Math.max(leftDepth, rightDepth);
   node.longest = Math.max(
-    leftDistance + rightDistance,
+    leftDepth + rightDepth,
     left ? left.longest : 0,
     right ? right.longest : 0
   );
-  return longestPathToLeaf;
+  return currentNodeDepth;
 }
