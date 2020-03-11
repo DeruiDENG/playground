@@ -25,7 +25,7 @@ export const diameterOfBinaryTree = function(root) {
     return 0;
   }
   updateNodeWithLongestDistanceToNode(root);
-  return findLongestPath(root);
+  return root.longest;
 };
 
 /**
@@ -40,18 +40,10 @@ function updateNodeWithLongestDistanceToNode(node) {
     ? updateNodeWithLongestDistanceToNode(right) + 1
     : 0;
   const longestPathToLeaf = Math.max(leftDistance, rightDistance);
-  node.longest = leftDistance + rightDistance;
+  node.longest = Math.max(
+    leftDistance + rightDistance,
+    left ? left.longest : 0,
+    right ? right.longest : 0
+  );
   return longestPathToLeaf;
-}
-
-/**
- *
- * @param {TreeNode} treeRoot
- * @return {number}
- */
-function findLongestPath(treeRoot) {
-  const leftMax = treeRoot.left ? findLongestPath(treeRoot.left) : 0;
-  const rightMax = treeRoot.right ? findLongestPath(treeRoot.right) : 0;
-  const selfMax = treeRoot.longest;
-  return Math.max(leftMax, rightMax, selfMax);
 }
