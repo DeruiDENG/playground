@@ -4,8 +4,11 @@ describe('answer for i40', () => {
   it('should work for `[3, 2, 1]`', () => {
     const arr = [3, 2, 1];
     const k = 2;
-    const expected = [1, 2];
+    const expected = [
+      [1, 2],
+      [2, 1],
+    ];
     const result = getLeastNumbers(arr, k);
-    expect(expected).toEqual(result);
+    expect(expected).toContainEqual(result);
   });
 });
