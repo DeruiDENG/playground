@@ -1,6 +1,6 @@
 import { threeSum } from './answer';
 
-describe('answer', () => {
+describe('q15', () => {
   it('should work for `[-1, 0, 1, 2, -1, -4]`', () => {
     const testCase = [-1, 0, 1, 2, -1, -4];
     const expected = [
