@@ -12,7 +12,7 @@ export const calculate = (sum: string): string | number => {
   return result;
 };
 
-const calculateNumber = (sum: string): number => {
+function calculateNumber(sum: string): number {
   const separateByPlus = splitByLastOccurrence(sum, '+');
   if (typeof separateByPlus !== 'string') {
     return (
@@ -45,7 +45,7 @@ const calculateNumber = (sum: string): number => {
   }
 
   return Number(sum);
-};
+}
 
 function splitByLastOccurrence(
   str: string,

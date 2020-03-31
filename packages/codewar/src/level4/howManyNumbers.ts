@@ -50,7 +50,7 @@ export function findAvailableNumbers(
       lastDigit
     );
     results.push(
-      ...subNumbers.map((subNumber) => mergeNumber(subNumber, lastDigit))
+      ...subNumbers.map(subNumber => mergeNumber(subNumber, lastDigit))
     );
   }
 

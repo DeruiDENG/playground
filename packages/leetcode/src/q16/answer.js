@@ -5,7 +5,7 @@
  * @param {number} target
  * @return {number}
  */
-var threeSumClosest = function (nums, target) {
+var threeSumClosest = function(nums, target) {
   nums.sort((a, b) => a - b);
   let result = Number.MAX_SAFE_INTEGER;
   let smallestDifference = Number.MAX_SAFE_INTEGER;

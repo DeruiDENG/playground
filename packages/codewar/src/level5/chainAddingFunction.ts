@@ -23,16 +23,16 @@ addTwo(3)(5); // 10
 We can assume any number being passed in will be valid whole number.
 */
 
-function addX(x: number) {
+function addX(this: { total: number }, x: number) {
   const total = this.total + x;
   const result = addX.bind({ total });
-  result.toString = function (): string {
+  result.toString = function(): string {
     return total.toString();
   };
 
   return result;
 }
 
-export default function add(x: number): any {
+export default function add(x: number) {
   return addX.bind({ total: 0 })(x);
 }

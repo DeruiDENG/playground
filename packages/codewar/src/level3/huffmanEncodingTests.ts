@@ -1,7 +1,7 @@
 import { decode, encode, frequencies } from './huffmanEncoding';
 
-describe('Huffman encoding', function () {
-  it('should happy path encode/decode work', function () {
+describe('Huffman encoding', function() {
+  it('should happy path encode/decode work', function() {
     const frequenciesResult = frequencies('aaaabcc');
     expect(frequenciesResult).toEqual([
       ['a', 4],
@@ -17,7 +17,7 @@ describe('Huffman encoding', function () {
     expect(decodedResult).toBe('aaaabcc');
   });
 
-  it('should unhappy path work', function () {
+  it('should unhappy path work', function() {
     expect(encode([], '')).toBe(null);
     expect(decode([], '')).toBe(null);
     expect(encode([['a', 1]], '')).toBe(null);

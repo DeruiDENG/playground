@@ -1,7 +1,7 @@
 import { knight } from './shortestKnightPath';
 
-describe('shortedKnightPath', function () {
-  it('should path sample test', function () {
+describe('shortedKnightPath', function() {
+  it('should path sample test', function() {
     const arr: [string, string, number][] = [
       ['a1', 'c1', 2],
       ['a1', 'f1', 3],

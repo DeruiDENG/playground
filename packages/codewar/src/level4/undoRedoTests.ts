@@ -1,7 +1,7 @@
 import { undoRedo } from './undoRedo';
 
-describe('undoRedo', function () {
-  it('should get/set works', function () {
+describe('undoRedo', function() {
+  it('should get/set works', function() {
     const obj = {
       x: 1,
       y: 2,
@@ -12,7 +12,7 @@ describe('undoRedo', function () {
     expect(unRe.get('x')).toBe(3);
   });
 
-  it('should simple undo works', function () {
+  it('should simple undo works', function() {
     const obj = {
       x: 1,
       y: 2,
@@ -29,7 +29,7 @@ describe('undoRedo', function () {
     }
   });
 
-  it('should simple redo works', function () {
+  it('should simple redo works', function() {
     const obj = {
       x: 1,
       y: 2,
@@ -50,7 +50,7 @@ describe('undoRedo', function () {
     }
   });
 
-  it('should chained get/set/undo/redo works', function () {
+  it('should chained get/set/undo/redo works', function() {
     const obj = {
       x: 1,
       y: 2,
@@ -98,7 +98,7 @@ describe('undoRedo', function () {
     }
   });
 
-  it('should new key works', function () {
+  it('should new key works', function() {
     const obj = {
       x: 1,
       y: 2,
@@ -113,7 +113,7 @@ describe('undoRedo', function () {
     expect(unRe.get('z')).toBe(10);
   });
 
-  it('should delete works', function () {
+  it('should delete works', function() {
     const obj = {
       x: 1,
       y: 2,
