@@ -17,11 +17,11 @@ const tests = [
   ],
 ];
 
-describe('calc', function() {
+describe('calc', function () {
   it('should evaluate correctly', () => {
-    tests.forEach(function(m) {
-      var x = calc(m[0]);
-      var y = m[1];
+    tests.forEach(function (m) {
+      const x = calc(m[0]);
+      const y = m[1];
       expect(x).to.equal(
         y,
         'Expected: "' + m[0] + '" to be ' + y + ' but got ' + x
@@ -29,7 +29,7 @@ describe('calc', function() {
     });
   });
 
-  it('should pass complex test', function() {
+  it('should pass complex test', function () {
     expect(
       calc(
         '(123.45*(678.90 / (-2.5+ 11.5)-(((80 -(19))) *33.25)) / 20) - (123.45*(678.90 / (-2.5+ 11.5)-(((80 -(19))) *33.25)) / 20) + (13 - 2)/ -(-11) '
@@ -37,7 +37,7 @@ describe('calc', function() {
     ).to.equal(1);
   });
 
-  it('should calculateUnary work', function() {
+  it('should calculateUnary work', function () {
     expect(calculateUnary('-5')).to.equal(-5);
     expect(calculateUnary('+5')).to.equal(5);
     expect(calculateUnary('5')).to.equal(5);

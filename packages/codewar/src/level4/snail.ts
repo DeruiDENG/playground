@@ -26,7 +26,7 @@ class SnailMap {
   }
 
   move(): number[] {
-    let result = [...this.array[0]];
+    const result = [...this.array[0]];
     this.currentPos.column = this.array.length - 1;
     const paths: number[] = SnailMap.generateDoubleArray(this.array.length - 1);
     for (let i = 0; i < paths.length; i++) {
@@ -40,7 +40,7 @@ class SnailMap {
   }
 
   private static generateDoubleArray(start: number) {
-    let result = [];
+    const result = [];
     for (let i = start; i >= 1; i--) {
       result.push(i, i);
     }

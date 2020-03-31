@@ -32,7 +32,7 @@ export function frequencies(s: string): Frequency[] {
 }
 
 function buildHuffmanTree(frequencies: Frequency[]): HuffmanRoot {
-  let labeledFrequencies: HuffmanRoot[] = frequencies.map(
+  const labeledFrequencies: HuffmanRoot[] = frequencies.map(
     ([char, frequency]): HuffmanLeave => ({
       frequency,
       char,
@@ -75,15 +75,15 @@ function buildDictionary(frequencies: Frequency[]) {
     return { [huffmanTree.char]: '0' };
   }
 
-  let acc = '';
-  let dictionary: any = {};
+  const acc = '';
+  const dictionary = {};
   buildDictionaryRecursive(dictionary, acc, huffmanTree);
 
   return dictionary;
 }
 
 function buildDictionaryRecursive(
-  dictionary: any,
+  dictionary,
   acc: string,
   treeNode: HuffmanRoot
 ) {
@@ -102,7 +102,7 @@ function sortFrequencies(frequencies: HuffmanRoot[]): HuffmanRoot[] {
   );
 }
 
-function encodeUsingDictionary(s: string, dictionary: any) {
+function encodeUsingDictionary(s: string, dictionary) {
   return s
     .split('')
     .map((char): string => dictionary[char])

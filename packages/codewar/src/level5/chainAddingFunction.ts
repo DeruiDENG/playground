@@ -24,9 +24,9 @@ We can assume any number being passed in will be valid whole number.
 */
 
 function addX(x: number) {
-  let total = this.total + x;
+  const total = this.total + x;
   const result = addX.bind({ total });
-  result.toString = function(): string {
+  result.toString = function (): string {
     return total.toString();
   };
 

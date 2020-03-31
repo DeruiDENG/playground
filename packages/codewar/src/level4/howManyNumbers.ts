@@ -38,7 +38,7 @@ export function findAvailableNumbers(
 
   const maxLastDigit = Math.min(digitSum - numDigit + 1, 9, allowedDigit);
   const lowestLastDigit = Math.ceil(digitSum / numDigit);
-  let results: number[] = [];
+  const results: number[] = [];
   for (
     let lastDigit = lowestLastDigit;
     lastDigit <= maxLastDigit;
@@ -50,7 +50,7 @@ export function findAvailableNumbers(
       lastDigit
     );
     results.push(
-      ...subNumbers.map(subNumber => mergeNumber(subNumber, lastDigit))
+      ...subNumbers.map((subNumber) => mergeNumber(subNumber, lastDigit))
     );
   }
 

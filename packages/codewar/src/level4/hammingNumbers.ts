@@ -1,8 +1,8 @@
 export function hamming(n: number): number {
-  let results = [1];
-  let indices = [0, 0, 0];
-  let primes = [2, 3, 5];
-  let nextMultiple = [2, 3, 5];
+  const results = [1];
+  const indices = [0, 0, 0];
+  const primes = [2, 3, 5];
+  const nextMultiple = [2, 3, 5];
 
   for (let i = 0; i < n; ++i) {
     results.push(Math.min(...nextMultiple));

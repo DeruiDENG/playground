@@ -10,7 +10,7 @@ const mergeSortedArray = (
   sortedArray1: number[],
   sortedArray2: number[]
 ): number[] => {
-  let sortedResult: number[] = [];
+  const sortedResult: number[] = [];
   let pointer1 = 0;
   let pointer2 = 0;
   while (pointer1 !== sortedArray1.length || pointer2 !== sortedArray2.length) {
@@ -41,7 +41,7 @@ export class G964 {
     let pointerOne = 1;
     let pointerTwo = 0;
     while (pointerOne < n) {
-      let base =
+      const base =
         sequenceOne[pointerOne] < sequenceTwo[pointerTwo]
           ? sequenceOne[pointerOne++]
           : sequenceTwo[pointerTwo++];

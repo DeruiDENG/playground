@@ -1,6 +1,6 @@
 export class G964 {
   public static accum(s: string): string {
-    let results: string[] = [];
+    const results: string[] = [];
     for (let i = 0; i < s.length; i++) {
       const repeatTime = i + 1;
       results.push(G964.getRepeatChar(s.charAt(i), repeatTime));

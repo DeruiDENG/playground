@@ -1,23 +1,23 @@
 import { undoRedo } from './undoRedo';
 
-describe('undoRedo', function() {
-  it('should get/set works', function() {
-    var obj = {
+describe('undoRedo', function () {
+  it('should get/set works', function () {
+    const obj = {
       x: 1,
       y: 2,
     };
-    var unRe = undoRedo(obj);
+    const unRe = undoRedo(obj);
     expect(unRe.get('x')).toBe(1);
     unRe.set('x', 3);
     expect(unRe.get('x')).toBe(3);
   });
 
-  it('should simple undo works', function() {
-    var obj = {
+  it('should simple undo works', function () {
+    const obj = {
       x: 1,
       y: 2,
     };
-    var unRe = undoRedo(obj);
+    const unRe = undoRedo(obj);
     unRe.set('y', 10);
     expect(unRe.get('y')).toBe(10);
     unRe.undo();
@@ -29,13 +29,13 @@ describe('undoRedo', function() {
     }
   });
 
-  it('should simple redo works', function() {
-    var obj = {
+  it('should simple redo works', function () {
+    const obj = {
       x: 1,
       y: 2,
     };
 
-    var unRe = undoRedo(obj);
+    const unRe = undoRedo(obj);
     unRe.set('y', 10);
     expect(unRe.get('y')).toBe(10);
     unRe.undo();
@@ -50,13 +50,13 @@ describe('undoRedo', function() {
     }
   });
 
-  it('should chained get/set/undo/redo works', function() {
-    var obj = {
+  it('should chained get/set/undo/redo works', function () {
+    const obj = {
       x: 1,
       y: 2,
     };
 
-    var unRe = undoRedo(obj);
+    const unRe = undoRedo(obj);
     unRe.set('y', 10);
     unRe.set('y', 100);
     unRe.set('x', 150);
@@ -98,13 +98,13 @@ describe('undoRedo', function() {
     }
   });
 
-  it('should new key works', function() {
-    var obj = {
+  it('should new key works', function () {
+    const obj = {
       x: 1,
       y: 2,
     };
 
-    var unRe = undoRedo(obj);
+    const unRe = undoRedo(obj);
     unRe.set('z', 10);
     expect(unRe.get('z')).toBe(10);
     unRe.undo();
@@ -113,13 +113,13 @@ describe('undoRedo', function() {
     expect(unRe.get('z')).toBe(10);
   });
 
-  it('should delete works', function() {
-    var obj = {
+  it('should delete works', function () {
+    const obj = {
       x: 1,
       y: 2,
     };
 
-    var unRe = undoRedo(obj);
+    const unRe = undoRedo(obj);
     unRe.del('x');
     expect(unRe.get('x')).toBe(undefined);
     expect(unRe.get('z')).toBe(undefined);

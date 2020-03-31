@@ -1,8 +1,8 @@
 import { triangle } from './insanedColorTriangles';
 
-describe('insaneColorTriangles', function() {
-  it('should works', function() {
-    let basicCases: [string, string][] = [
+describe('insaneColorTriangles', function () {
+  it('should works', function () {
+    const basicCases: [string, string][] = [
       ['B', 'B'],
       ['GB', 'R'],
       ['RRR', 'R'],
@@ -11,7 +11,7 @@ describe('insaneColorTriangles', function() {
       ['RBRGBRBGGRRRBGBBBGG', 'G'],
     ];
 
-    basicCases.forEach(basicCase => {
+    basicCases.forEach((basicCase) => {
       const [first, second] = basicCase;
       expect(triangle(first)).toBe(second);
     });

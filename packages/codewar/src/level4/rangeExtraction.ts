@@ -5,7 +5,7 @@
 
 export function solution(list: number[]): string {
   let range: number[] = [];
-  let ranges: number[][] = [];
+  const ranges: number[][] = [];
   for (const number of list) {
     if (range.length === 0 || number - range[range.length - 1] === 1) {
       range.push(number);
@@ -20,7 +20,7 @@ export function solution(list: number[]): string {
 }
 
 function serialize(ranges: number[][]) {
-  const serializedRanges = ranges.map(range => {
+  const serializedRanges = ranges.map((range) => {
     if (range.length === 1) {
       return range[0].toString();
     } else if (range.length === 2) {

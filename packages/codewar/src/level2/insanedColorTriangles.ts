@@ -3,7 +3,7 @@ import { factorial } from '../utils/integers';
 type Color = 'R' | 'G' | 'B';
 
 export function triangle(row: string): Color {
-  const rowInDigits = row.split('').map(convertToDigit);
+  const rowInDigits = (row.split('') as Color[]).map(convertToDigit);
   const lengthOfRow = row.length;
   const multiplier = lengthOfRow % 2 === 0 ? -1 : 1;
   let rawResult =
