@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { Link, graphql, PageProps } from 'gatsby';
 
 import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { rhythm } from '../utils/typography';
 
-const BlogIndex = ({ data, location }) => {
+const BlogIndex = ({ data, location }: PageProps<Data>) => {
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.edges;
 
@@ -45,6 +45,29 @@ const BlogIndex = ({ data, location }) => {
 };
 
 export default BlogIndex;
+
+interface Data {
+  site: {
+    siteMetadata: {
+      title: string;
+    };
+  };
+  allMarkdownRemark: {
+    edges: {
+      node: {
+        excerpt: string;
+        fields: {
+          slug: string;
+        };
+        frontmatter: {
+          date: string;
+          title: string;
+          description: string;
+        };
+      };
+    }[];
+  };
+}
 
 export const pageQuery = graphql`
   query {

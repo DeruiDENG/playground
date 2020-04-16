@@ -1,13 +1,18 @@
 import React from 'react';
-import { Link } from 'gatsby';
-
+import { Link, withPrefix, PageProps } from 'gatsby';
 import { rhythm, scale } from '../utils/typography';
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`;
+interface Props {
+  location: PageProps['location'];
+  title: React.ReactNode;
+  children: React.ReactNode;
+}
+
+const Layout = ({ location, title, children }: Props) => {
+  const isHomepage = location.pathname === withPrefix('/');
   let header;
 
-  if (location.pathname === rootPath) {
+  if (isHomepage) {
     header = (
       <h1
         style={{
