@@ -5,6 +5,7 @@ import Bio from '../components/bio';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { rhythm, scale } from '../utils/typography';
+import { PageContext } from '../../build/createPages';
 
 const BlogPostTemplate = ({
   data,
@@ -64,15 +65,15 @@ const BlogPostTemplate = ({
         >
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+              <Link to={previous.slug} rel="prev">
+                ← {previous.title}
               </Link>
             )}
           </li>
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+              <Link to={next.slug} rel="next">
+                {next.title} →
               </Link>
             )}
           </li>
@@ -121,18 +122,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-interface ContextPost {
-  fields: {
-    slug: string;
-  };
-  frontmatter: {
-    title: string;
-  };
-}
-
-interface PageContext {
-  slug: string;
-  previous: ContextPost;
-  next: ContextPost;
-}
