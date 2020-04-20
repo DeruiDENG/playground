@@ -12,16 +12,13 @@ const BlogPostTemplate = ({
   pageContext,
   location,
 }: PageProps<Data, PageContext>) => {
-  const post = data.markdownRemark;
+  const post = usePost(data);
   const siteTitle = data.site.siteMetadata.title;
   const { previous, next } = pageContext;
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
-      />
+      <SEO title={post.title} description={post.description} />
       <article>
         <header>
           <h1
@@ -30,7 +27,7 @@ const BlogPostTemplate = ({
               marginBottom: 0,
             }}
           >
-            {post.frontmatter.title}
+            {post.title}
           </h1>
           <p
             style={{
@@ -39,7 +36,7 @@ const BlogPostTemplate = ({
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date}
+            {post.date}
           </p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
@@ -85,6 +82,36 @@ const BlogPostTemplate = ({
 
 export default BlogPostTemplate;
 
+function usePost(data: Data): Post {
+  const { markdownRemark, wordpressPost } = data;
+  if (markdownRemark) {
+    return {
+      title: markdownRemark.frontmatter.title,
+      excerpt: markdownRemark.excerpt,
+      html: markdownRemark.html,
+      date: markdownRemark.frontmatter.date,
+      description:
+        markdownRemark.frontmatter.description ?? markdownRemark.excerpt,
+    };
+  }
+
+  return {
+    title: wordpressPost.title,
+    excerpt: wordpressPost.excerpt,
+    html: wordpressPost.content,
+    date: wordpressPost.date,
+    description: wordpressPost.excerpt,
+  };
+}
+
+interface Post {
+  title: string;
+  excerpt: string;
+  html: string;
+  date: string;
+  description: string;
+}
+
 interface Data {
   site: {
     siteMetadata: {
@@ -100,6 +127,12 @@ interface Data {
       date: string;
       description: string;
     };
+  };
+  wordpressPost: {
+    title: string;
+    excerpt: string;
+    content: string;
+    date: string;
   };
 }
 
@@ -119,6 +152,12 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         description
       }
+    }
+    wordpressPost(slug: { eq: $slug }) {
+      title
+      excerpt
+      content
+      date(formatString: "MMMM DD, YYYY")
     }
   }
 `;

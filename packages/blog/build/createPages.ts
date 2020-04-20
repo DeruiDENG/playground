@@ -81,7 +81,7 @@ async function getPostsFromMarkdown(graphql: any): Promise<Post[]> {
 }
 
 async function getPostsFromWordPress(graphql: any): Promise<Post[]> {
-  const markdownResults: {
+  const wordpressResult: {
     data: {
       allWordpressPost: {
         edges: {
@@ -109,7 +109,7 @@ async function getPostsFromWordPress(graphql: any): Promise<Post[]> {
     `
   );
 
-  const posts = markdownResults.data.allWordpressPost.edges;
+  const posts = wordpressResult.data.allWordpressPost.edges;
   return posts.map(post => ({
     slug: post.node.slug,
     title: post.node.title,

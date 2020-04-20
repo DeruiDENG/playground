@@ -1,14 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Moonface's wonderland`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Derui Deng`,
+      summary: `A developer who lives and works in Xi'an.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `Moonface's personal blog`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `moonfaceddr`,
     },
   },
   plugins: [
@@ -60,8 +60,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Moonface的异想世界`,
+        short_name: `Moonface's wonderland`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
