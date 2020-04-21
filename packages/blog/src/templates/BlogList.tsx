@@ -6,10 +6,16 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { rhythm } from '../utils/typography';
 import { BlogListContext } from '../../build/createPages';
+import Pagination from '../components/Pagination';
 
-const BlogList = ({ data, location }: PageProps<Data, BlogListContext>) => {
+const BlogList = ({
+  data,
+  location,
+  pageContext,
+}: PageProps<Data, BlogListContext>) => {
   const siteTitle = data.site.siteMetadata.title;
-  const posts = usePostAbstracts(data);
+  const { totalPages, pageIndex } = pageContext;
+  const posts = getPostAbstracts(data);
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -40,11 +46,12 @@ const BlogList = ({ data, location }: PageProps<Data, BlogListContext>) => {
           </article>
         );
       })}
+      <Pagination current={pageIndex} total={totalPages} />
     </Layout>
   );
 };
 
-function usePostAbstracts(data: Data): PostAbstract[] {
+function getPostAbstracts(data: Data): PostAbstract[] {
   const { allMarkdownRemark, allWordpressPost } = data;
   const { excerptLength } = data.site.siteMetadata.blogList;
   const markdownPosts: PostAbstract[] = allMarkdownRemark.edges.map(edge => ({
