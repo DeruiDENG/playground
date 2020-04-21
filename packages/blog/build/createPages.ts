@@ -41,6 +41,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
   async function createBlogIndexPages(posts: Post[]) {
     const template = path.resolve(`./src/templates/BlogList.tsx`);
     const postsPerPage = await getPostsPerPage();
+    const totalPages = Math.ceil(posts.length / postsPerPage);
     let pageIndex = 0;
     while (true) {
       const postsForOnePage = posts.slice(
@@ -75,10 +76,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
           : (wpLastIndex as number) - wpStartIndex + 1;
 
       createPage<BlogListContext>({
-        path: pageIndex === 0 ? '/' : `/page/${pageIndex}`,
+        path: pageIndex === 0 ? '/' : `/page/${pageIndex + 1}`,
         component: template,
         context: {
           pageIndex,
+          totalPages,
           mdStartIndex: mdStartIndex === undefined ? -1 : mdStartIndex,
           mdCount,
           wpStartIndex: wpStartIndex === undefined ? -1 : wpStartIndex,
@@ -119,6 +121,7 @@ export interface PageContext {
 
 export interface BlogListContext {
   pageIndex: number;
+  totalPages: number;
   mdStartIndex: number;
   mdCount: number;
   wpStartIndex: number;
