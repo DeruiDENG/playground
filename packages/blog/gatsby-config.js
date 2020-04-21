@@ -10,6 +10,10 @@ module.exports = {
     social: {
       twitter: `moonfaceddr`,
     },
+    blogList: {
+      pagination: 10,
+      excerptLength: 150,
+    },
   },
   plugins: [
     {
