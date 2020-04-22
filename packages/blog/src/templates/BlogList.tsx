@@ -21,9 +21,9 @@ const BlogList = ({
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       {pageIndex === 0 && <Bio />}
-      {posts.map(({ title, slug, excerpt, date }) => {
+      {posts.map(({ title, slug, excerpt, date }, index) => {
         return (
-          <article className={styles.blog} key={slug}>
+          <article className={styles.blog} key={index}>
             <header className={styles.blog__header}>
               <h2 className={styles.blog__title}>
                 <Link style={{ boxShadow: `none` }} to={slug}>
@@ -31,11 +31,11 @@ const BlogList = ({
                 </Link>
               </h2>
               <small className={styles.blog__subTitle}>
-                {date.toDateString()}
+                {date.toLocaleDateString()}
               </small>
             </header>
             <section>
-              <p
+              <div
                 dangerouslySetInnerHTML={{
                   __html: excerpt,
                 }}
