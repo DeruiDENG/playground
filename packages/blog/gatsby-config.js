@@ -9,6 +9,7 @@ module.exports = {
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
       twitter: `moonfaceddr`,
+      github: `https://github.com/DeruiDENG`,
     },
     blogList: {
       pagination: 10,

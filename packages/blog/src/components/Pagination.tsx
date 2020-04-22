@@ -23,16 +23,24 @@ export default function Pagination({ current, total }: Props) {
   ];
 
   return (
-    <div className={paginationStyle.pagination}>
-      {pageNumbersToDisplay.map((pageNumber, index, pageNumbers) => (
-        <Link
-          className={paginationStyle.pagination__item}
-          key={pageNumber}
-          to={pageNumber === 1 ? '/' : `/page/${pageNumber}`}
-        >
-          {pageNumber}
-        </Link>
-      ))}
-    </div>
+    <nav className={paginationStyle.pagination}>
+      {pageNumbersToDisplay.map((pageNumber, index, pageNumbers) => {
+        return (
+          <React.Fragment key={pageNumber}>
+            {index > 0 && pageNumber - pageNumbers[index - 1] > 1 && (
+              <span className={paginationStyle.pagination__separator}>...</span>
+            )}
+            <Link
+              className={`${paginationStyle.pagination__item} ${
+                index === current ? paginationStyle.active : ''
+              }`}
+              to={pageNumber === 1 ? '/' : `/page/${pageNumber}`}
+            >
+              {pageNumber}
+            </Link>
+          </React.Fragment>
+        );
+      })}
+    </nav>
   );
 }

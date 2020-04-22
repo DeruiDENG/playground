@@ -21,7 +21,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
   await createBlogIndexPages(posts);
 
   function createBlogPages(posts: Post[]) {
-    const blogPost = path.resolve(`./src/templates/blog-post.tsx`);
+    const blogPost = path.resolve(`./src/templates/BlogPost.tsx`);
     posts.forEach((post, index) => {
       const previous = index === posts.length - 1 ? null : posts[index + 1];
       const next = index === 0 ? null : posts[index - 1];
