@@ -7,8 +7,8 @@ name: deploy-blog
 on:
   push:
     branches: [ master ]
-    paths: 
-      - packages/blog/**.*
+#    paths: 
+#      - packages/blog/**.*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,4 +33,5 @@ jobs:
         zeit-token: ${{ secrets.ZEIT_TOKEN }} # Required
         now-org-id: ${{ secrets.ZEIT_ORG_ID}}  #Required
         now-project-id: ${{ secrets.ZEIT_PROJECT_ID}} #Required 
-        working-directory: ./packages/blog/public
+        working-directory: ./
+        now-args: '--prod'
