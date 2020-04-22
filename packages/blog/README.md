@@ -4,6 +4,7 @@ It gets the artical data from both Wordpress and Markdown.
 
 Tech stack: TypeScript, React, Sass, Eslint, Prettier
 
+
 ## Basics
 Start the dev server:
 > yarn start
