@@ -3,5 +3,5 @@ Personal blog based on Gatsby
 Start the dev server:
 > yarn start
 
-Build:
+Build artifact:
 > yarn build
