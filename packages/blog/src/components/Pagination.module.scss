@@ -1,9 +1,33 @@
+@import '../theme.scss';
+
 .pagination {
   display: flex;
   justify-content: center;
+  max-width: 16rem;
+  margin: 0 auto 1rem;
 }
 
 .pagination__item {
-  margin-right: 0.5rem;
+  color: $primary-color;
+  margin-right: 1rem;
+  padding: 0.125rem 0.5rem;
   text-decoration: none;
+  box-shadow: none;
+  border-radius: 4px;
+  background-color: white;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    color: white;
+    background-color: $primary-color;
+  }
+
+  &.active {
+    border: 1px solid $primary-color;
+  }
+}
+
+.pagination__separator {
+  padding: 0.125rem 0.5rem;
+  margin-right: 1rem;
 }

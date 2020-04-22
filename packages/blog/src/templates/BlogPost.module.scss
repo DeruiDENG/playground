@@ -1,0 +1,23 @@
+@import '../theme';
+
+.title {
+  margin-top: 1.75rem;
+  margin-bottom: 0;
+}
+
+.info {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: smaller;
+}
+
+.navigator {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+
+  a {
+    color: $primary-color;
+  }
+}

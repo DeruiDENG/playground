@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, graphql, PageProps } from 'gatsby';
 
-import Bio from '../components/bio';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import SEO from '../components/seo';
-import { rhythm, scale } from '../utils/typography';
+import { rhythm } from '../utils/typography';
 import { PageContext } from '../../build/createPages';
+import styles from './BlogPost.module.scss';
 
 const BlogPostTemplate = ({
   data,
@@ -21,45 +21,19 @@ const BlogPostTemplate = ({
       <SEO title={post.title} description={post.description} />
       <article>
         <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
-            {post.title}
-          </h1>
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-            }}
-          >
-            {post.date}
-          </p>
+          <h1 className={styles.title}>{post.title}</h1>
+          <p className={styles.info}>{post.date}</p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
           style={{
-            marginBottom: rhythm(1),
+            marginBottom: '1.75rem',
           }}
         />
-        <footer>
-          <Bio />
-        </footer>
       </article>
 
       <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
+        <ul className={styles.navigator}>
           <li>
             {previous && (
               <Link to={previous.slug} rel="prev">
