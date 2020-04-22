@@ -3,7 +3,6 @@ import { Link, graphql, PageProps } from 'gatsby';
 
 import Layout from '../components/Layout';
 import SEO from '../components/seo';
-import { rhythm } from '../utils/typography';
 import { PageContext } from '../../build/createPages';
 import styles from './BlogPost.module.scss';
 
@@ -35,16 +34,16 @@ const BlogPostTemplate = ({
       <nav>
         <ul className={styles.navigator}>
           <li>
-            {previous && (
-              <Link to={previous.slug} rel="prev">
-                ← {previous.title}
+            {next && (
+              <Link to={next.slug} rel="next">
+                ← Newer
               </Link>
             )}
           </li>
           <li>
-            {next && (
-              <Link to={next.slug} rel="next">
-                {next.title} →
+            {previous && (
+              <Link to={previous.slug} rel="prev">
+                Older →
               </Link>
             )}
           </li>

@@ -120,7 +120,7 @@ export interface PageContext {
 }
 
 export interface BlogListContext {
-  pageIndex: number;
+  pageIndex: number; // starting from 0
   totalPages: number;
   mdStartIndex: number;
   mdCount: number;

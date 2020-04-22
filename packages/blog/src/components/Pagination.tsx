@@ -20,7 +20,7 @@ export default function Pagination({ current, total }: Props) {
         total,
       ].filter(pageNumber => pageNumber >= 1 && pageNumber <= total)
     ),
-  ];
+  ].sort((a, b) => a - b);
 
   return (
     <nav className={paginationStyle.pagination}>
@@ -32,7 +32,7 @@ export default function Pagination({ current, total }: Props) {
             )}
             <Link
               className={`${paginationStyle.pagination__item} ${
-                index === current ? paginationStyle.active : ''
+                pageNumber === current + 1 ? paginationStyle.active : ''
               }`}
               to={pageNumber === 1 ? '/' : `/page/${pageNumber}`}
             >

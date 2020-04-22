@@ -25,11 +25,11 @@ const BlogList = ({
         return (
           <article className={styles.blog} key={slug}>
             <header className={styles.blog__header}>
-              <h3 className={styles.blog__title}>
+              <h2 className={styles.blog__title}>
                 <Link style={{ boxShadow: `none` }} to={slug}>
                   {title}
                 </Link>
-              </h3>
+              </h2>
               <small className={styles.blog__subTitle}>
                 {date.toDateString()}
               </small>
