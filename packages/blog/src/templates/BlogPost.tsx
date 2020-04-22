@@ -21,7 +21,9 @@ const BlogPostTemplate = ({
       <article>
         <header>
           <h1 className={styles.title}>{post.title}</h1>
-          <p className={styles.info}>{post.date}</p>
+          <p className={styles.info}>
+            {new Date(post.date).toLocaleDateString()}
+          </p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
