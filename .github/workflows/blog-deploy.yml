@@ -7,8 +7,9 @@ name: deploy-blog
 on:
   push:
     branches: [ master ]
-#    paths: 
-#      - packages/blog/**.*
+    paths: 
+      - packages/blog/**.*
+      - .github/workflows/blog-deploy.yml
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
