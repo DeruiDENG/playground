@@ -1,7 +1,7 @@
 ---
 title: 头七
 date: "2020-04-23T13:46:03.284Z"
-description: "My first post"
+description: "一个星期以前，奶奶在睡梦中，静静地走了。"
 ---
 
 ![头七](头七.jpg)
