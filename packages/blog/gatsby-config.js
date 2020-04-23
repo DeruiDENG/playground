@@ -6,7 +6,7 @@ module.exports = {
       summary: `A developer who lives and works in Xi'an.`,
     },
     description: `Moonface's personal blog`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    siteUrl: `https://blog.deeerui.com/`,
     social: {
       twitter: `moonfaceddr`,
       github: `https://github.com/DeruiDENG`,
@@ -58,7 +58,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
+        trackingId: `UA-164325708-1`,
       },
     },
     `gatsby-plugin-feed`,
@@ -71,7 +71,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/app-icon.jpg`,
       },
     },
     `gatsby-plugin-react-helmet`,
@@ -96,6 +96,6 @@ module.exports = {
     `gatsby-plugin-sass`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 };

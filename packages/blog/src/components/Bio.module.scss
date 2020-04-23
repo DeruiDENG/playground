@@ -6,7 +6,11 @@
   flex-wrap: wrap;
 
   a {
-    color: $secondary-color;
+    color: $primary-color;
+
+    &:hover {
+      color: $secondary-color;
+    }
   }
 }
 
