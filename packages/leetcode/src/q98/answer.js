@@ -8,6 +8,13 @@
  */
 
 /**
+ * @typedef Task
+ * @prop {TreeNode} node
+ * @prop {number} lower
+ * @prop {number} upper
+ */
+
+/**
  * @param {TreeNode} root
  * @return {boolean}
  */
@@ -16,57 +23,27 @@ var isValidBST = function(root) {
     return true;
   }
 
-  const queue = [root];
+  /**
+   * @type {Task[]}
+   */
+  const queue = [{ node: root, lower: -Infinity, upper: Infinity }];
   while (queue.length) {
-    const node = queue.shift();
-    const { left, right, val } = node;
-    if (left) {
-      if (!validateAllNodes(left, node => node.val < val)) {
-        return false;
-      }
+    const { node, upper, lower } = queue.shift();
+    const { left, right } = node;
+    if (node.val < lower || node.val > upper) {
+      return false;
+    }
 
-      if (left.left || left.right) {
-        queue.push(left);
-      }
+    if (left) {
+      queue.push({ node: left, lower, upper: node.val });
     }
 
     if (right) {
-      if (!validateAllNodes(right, node => node.val > val)) {
-        return false;
-      }
-
-      if (right.left || right.right) {
-        queue.push(right);
-      }
+      queue.push({ node: right, lower: node.val, upper });
     }
   }
 
   return true;
 };
-
-/**
- *
- * @param {TreeNode} treeRoot
- * @param {(node:TreeNode)=>boolean} isValidate
- */
-function validateAllNodes(treeRoot, isValidate) {
-  const queue = [treeRoot];
-  while (queue.length) {
-    const node = queue.shift();
-    if (isValidate(node) === false) {
-      return false;
-    }
-
-    if (node.left) {
-      queue.push(node.left);
-    }
-
-    if (node.right) {
-      queue.push(node.right);
-    }
-  }
-
-  return true;
-}
 
 export { isValidBST };
