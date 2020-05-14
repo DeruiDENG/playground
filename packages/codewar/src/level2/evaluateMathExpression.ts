@@ -32,7 +32,7 @@ function removeParentheses(str: string): string {
  * @param expression
  */
 function calcPure(expression: string): number {
-  console.log(`compute: ${expression}`);
+  // console.log(`compute: ${expression}`);
   const separatedByPlus = expression.split(LastBinaryAddRegex);
   if (separatedByPlus.length === 2) {
     return calcPure(separatedByPlus[0]) + calcPure(separatedByPlus[1]);

@@ -3,6 +3,7 @@ import { G964 } from './countKeyPrimes';
 
 describe('Fixed Tests', function() {
   it('Basic tests countKprimes', function() {
+    console.log(process.versions.node);
     expect(G964.countKprimes(2, 0, 100)).toEqual([
       4,
       6,

@@ -12,7 +12,6 @@
 export function findAll(n: number, k: number): [number, string, string] | [] {
   const availableNumbers = findAvailableNumbers(n, k, 9);
   if (availableNumbers.length) {
-    console.log(availableNumbers);
     return [
       availableNumbers.length,
       Math.min(...availableNumbers).toString(),
