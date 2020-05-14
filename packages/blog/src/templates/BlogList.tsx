@@ -25,22 +25,20 @@ const BlogList = ({
         return (
           <article className={styles.blog} key={index}>
             <header className={styles.blog__header}>
-              <h2 className={styles.blog__title}>
-                <Link style={{ boxShadow: `none` }} to={slug}>
-                  {title}
-                </Link>
-              </h2>
-              <small className={styles.blog__subTitle}>
-                {date.toLocaleDateString()}
-              </small>
+              <Link style={{ boxShadow: `none` }} to={decodeURI(slug)}>
+                <h2 className={styles.blog__title}>{title}</h2>
+                <small className={styles.blog__subTitle}>
+                  {date.toLocaleDateString()}
+                </small>
+                <section className={styles.blog__excerpt}>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: excerpt,
+                    }}
+                  />
+                </section>
+              </Link>
             </header>
-            <section>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: excerpt,
-                }}
-              />
-            </section>
           </article>
         );
       })}
@@ -61,7 +59,7 @@ function getPostAbstracts(data: Data): PostAbstract[] {
 
   const wordPressPosts: PostAbstract[] = allWordpressPost.edges.map(edge => ({
     title: edge.node.title,
-    slug: edge.node.slug,
+    slug: `/${edge.node.slug}`,
     excerpt:
       edge.node.excerpt.length < excerptLength
         ? edge.node.excerpt

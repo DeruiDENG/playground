@@ -6,6 +6,9 @@
 
 .blog__header {
   margin-bottom: 0.5rem;
+  a {
+    text-decoration: none;
+  }
 }
 
 .blog__title {
@@ -22,4 +25,8 @@
 
 .blog__sub-title {
   color: rgba(0, 0, 0, 0.7);
+}
+
+.blog__excerpt {
+  color: #222222;
 }

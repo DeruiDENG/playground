@@ -43,7 +43,7 @@ const Bio = () => {
         alt={author.name}
         className={styles.bioImage}
       />
-      <p>
+      <div>
         Personal blog by{' '}
         <strong>
           <a href={social.github} target="_blank" rel="noopener noreferrer">
@@ -51,7 +51,7 @@ const Bio = () => {
           </a>
         </strong>
         .<div>{author.summary}</div>
-      </p>
+      </div>
     </div>
   );
 };
