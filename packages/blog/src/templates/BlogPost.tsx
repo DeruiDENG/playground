@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import SEO from '../components/seo';
 import { PageContext } from '../../build/createPages';
 import styles from './BlogPost.module.scss';
+import { Comments } from '../components/Comment';
 
 const BlogPostTemplate = ({
   data,
@@ -31,8 +32,8 @@ const BlogPostTemplate = ({
             marginBottom: '1.75rem',
           }}
         />
+        <Comments />
       </article>
-
       <nav>
         <ul className={styles.navigator}>
           <li>
