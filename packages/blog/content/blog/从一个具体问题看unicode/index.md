@@ -1,0 +1,77 @@
+---
+title: 从一个具体问题了解unicode
+date: "2020-05-31T21:45:03.284Z"
+description: "In progress"
+---
+
+## 问题
+项目中使用了lodash进行一段字符串的处理：
+```javascript
+_.lowerCase('𝐇𝐄𝐋𝐋𝐎');
+```
+我们期待它将字符串转换为小写的`hello`，但实际上lodash返回了这样的结果：
+```javascript
+"𝐇 𝐄 𝐋 𝐋 𝐎"
+```
+使用原生的`String.toLowerCase`则没有任何效果
+```javascript
+'𝐇𝐄𝐋𝐋𝐎'.toLowerCase()
+// "𝐇𝐄𝐋𝐋𝐎"
+```
+## 问题的原因
+
+我们注意到出现问题的字符串`𝐇𝐄𝐋𝐋𝐎`是一种粗体的形式，而这不是因为存在任何的样式，而是因为，它们是一些特殊的字符，就像`你我他`这样的汉字一样。
+
+我们在[这个网站](https://unicode-search.net/unicode-namesearch.pl?term=BOLD)上发现了更多的关于这些特殊字符的信息
+
+![image-20200531215839809](./image-20200531215839809.png)
+
+
+
+**它们是一些特殊的字符**，从lodash的源码我们也可以看到，`_.lowerCase`方法对’非常规‘的字符做了一些特殊的处理，将其替换为空格（在后面我们会解释’非常规‘是什么意思）:
+
+```javascript
+/**
+ * Converts `string`, as space separated words, to lower case.
+ *
+ * @since 4.0.0
+ * @category String
+ * @param {string} [string=''] The string to convert.
+ * @returns {string} Returns the lower cased string.
+ * @see camelCase, kebabCase, snakeCase, startCase, upperCase, upperFirst
+ * @example
+ *
+ * lowerCase('--Foo-Bar--')
+ * // => 'foo bar'
+ *
+ * lowerCase('fooBar')
+ * // => 'foo bar'
+ *
+ * lowerCase('__FOO_BAR__')
+ * // => 'foo bar'
+ */
+const lowerCase = (string) => (
+  words(toString(string).replace(reQuotes, '')).reduce((result, word, index) => (
+    result + (index ? ' ' : '') + word.toLowerCase()
+  ), '')
+)
+```
+
+## Unicode
+
+在上面提到的网站中，我们看到了一些名词，unicode, unicode code point, character, UTF-8 encoding等，它们都代表什么意思呢？
+
+### 什么是unicode
+
+> Unicode is a standard character set that numbers and defines [characters](https://developer.mozilla.org/en-US/docs/Glossary/Character) from the world's different languages, writing systems, and symbols. By assigning each character a number, programmers can create [character encodings](https://developer.mozilla.org/en-US/docs/Glossary/Character_encoding), to let computers store, process, and transmit any combination of languages in the same file or program. 
+>
+>  --- MDN, https://developer.mozilla.org/en-US/docs/Glossary/Unicode
+
+从这段介绍我们可以看到，unicode是一个标准，它定义了一个非常大的字符集，包含了这个世界上各种不同的语言文字和符号，包括中文、英文、数字、标点，甚至还包含emoji，在最新的unicode标准中，它定义了超过14万个不同的字符。
+
+简单来说，unicode标准试图给世界上存在的每一种符号，赋予一个独特的编码。例如，`U+4F60`被用来表示`你`, `U+1D407`则被用来表示上面问题中提到的`𝐇`
+
+
+
+## 参考阅读
+
