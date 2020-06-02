@@ -61,15 +61,35 @@ const lowerCase = (string) => (
 
 在上面提到的网站中，我们看到了一些名词，unicode, unicode code point, character, UTF-8 encoding等，它们都代表什么意思呢？
 
-### 什么是unicode
+### 什么是Unicode
 
 > Unicode is a standard character set that numbers and defines [characters](https://developer.mozilla.org/en-US/docs/Glossary/Character) from the world's different languages, writing systems, and symbols. By assigning each character a number, programmers can create [character encodings](https://developer.mozilla.org/en-US/docs/Glossary/Character_encoding), to let computers store, process, and transmit any combination of languages in the same file or program. 
 >
 >  --- MDN, https://developer.mozilla.org/en-US/docs/Glossary/Unicode
 
-从这段介绍我们可以看到，unicode是一个标准，它定义了一个非常大的字符集，包含了这个世界上各种不同的语言文字和符号，包括中文、英文、数字、标点，甚至还包含emoji，在最新的unicode标准中，它定义了超过14万个不同的字符。
+unicode是一个标准，它定义了一个非常大的字符集，包含了这个世界上各种不同的语言文字和符号，包括中文、英文、数字、标点，甚至还包含emoji，在最新的unicode标准中，它定义了超过14万个不同的字符。
 
-简单来说，unicode标准试图给世界上存在的每一种符号，赋予一个独特的编码。例如，`U+4F60`被用来表示`你`, `U+1D407`则被用来表示上面问题中提到的`𝐇`
+**简单来说，unicode标准试图给世界上存在的每一种符号，赋予一个独特的编码。**
+
+例如，`U+4F60`被用来表示`你`, `U+1D407`则被用来表示上面问题中提到的`𝐇`
+
+### 码点(code point)
+
+刚刚提到的，用来表示`你`的`U+4F60`和用来表示`H`的`U+1D407`，被称作码点(code point)。
+
+在unicode字符集中的每一个符号，都有一个唯一的码点。
+
+码点是一串数字，在最新的标准中，码点可以用一个长度为六的十六进制数表示，取值范围从`#000000`一直到`#10FFFF`，因此理论上讲它可以容纳`17*(2^16)=1114112`个字符
+
+#### 平面
+
+在用于表示码点的六位十六进制数中，前两位被称作平面，用于对unicode字符进行分区。
+
+最常见的0号平面被称作Basic Multilingual Plane(基本多语种平面)，对应的码点区间是U+000000 ~ U+00FFFF，包含了最常见的一些字符。
+
+从#00到#FF，技术上讲，我们可以支持多达256个平面，但目前最新的Unicode 13.0版中，只定义了17个平面，并且有部分平面并没有分配任何字符。
+
+### 什么是UTF-xxx
 
 
 
