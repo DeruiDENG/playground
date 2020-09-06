@@ -18,16 +18,53 @@ function calculateNetworkQuality(network) {
    */
   const toProcess = new Set([0]);
 
-  while (true) {}
+  while (true) {
+    let maxQuality = Number.MIN_SAFE_INTEGER;
+    /**
+     * @type {number}
+     */
+    let maxIndex = null;
+    toProcess.forEach(index => {
+      const nearbyPoints = findNearByPointsIndex(index, ROW, COLUMN);
+      const quality = calculateQuality(
+        flattenNetwork[index],
+        nearbyPoints,
+        resultMap
+      );
+      if (quality > maxQuality) {
+        maxQuality = quality;
+        maxIndex = index;
+      }
+    });
+
+    resultMap.set(maxIndex, maxQuality);
+    toProcess.delete(maxIndex);
+    findNearByPointsIndex(maxIndex, ROW, COLUMN)
+      .filter(pointIndex => !resultMap.get(pointIndex))
+      .forEach(index => toProcess.add(index));
+
+    if (maxIndex === flattenNetwork.length - 1) {
+      return maxQuality;
+    }
+  }
 }
 
 /**
  *
  * @param {number} pointQuality
- * @param {number} pointIndex
+ * @param {number[]} nearbyPointsIndexes
  * @param {Map<number, number>} resultMap
  */
-function calculateQuality(pointQuality, nearbyPointIndex, resultMap) {}
+function calculateQuality(pointQuality, nearbyPointsIndexes, resultMap) {
+  const nearByPointsQuality = nearbyPointsIndexes
+    .map(index => resultMap.get(index))
+    .filter(quality => !!quality);
+  if (nearByPointsQuality.length === 0) {
+    return pointQuality;
+  } else {
+    return Math.min(pointQuality, Math.max(...nearByPointsQuality));
+  }
+}
 
 /**
  *
