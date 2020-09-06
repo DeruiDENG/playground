@@ -9,14 +9,14 @@ function calculateNetworkQuality(network) {
   const COLUMN = network[0].length;
   const flattenNetwork = network.reduce((acc, row) => [...acc, ...row], []);
   /**
-   * @type {Map<number, number>} - key: point index, value: quality of the index
+   * @type {Map<number, number>} - a map to save the points with known quality when connected with the start point
    */
   const resultMap = new Map();
   /**
    *
    * @type {Set<number>}
    */
-  const toProcess = new Set([0]);
+  const toProcessPointIndexes = new Set([0]);
 
   while (true) {
     let maxQuality = Number.MIN_SAFE_INTEGER;
@@ -24,7 +24,7 @@ function calculateNetworkQuality(network) {
      * @type {number}
      */
     let maxIndex = null;
-    toProcess.forEach(index => {
+    toProcessPointIndexes.forEach(index => {
       const nearbyPoints = findNearByPointsIndex(index, ROW, COLUMN);
       const quality = calculateQuality(
         flattenNetwork[index],
@@ -37,11 +37,14 @@ function calculateNetworkQuality(network) {
       }
     });
 
+    // Add the new point to the result list
     resultMap.set(maxIndex, maxQuality);
-    toProcess.delete(maxIndex);
+    toProcessPointIndexes.delete(maxIndex);
+
+    // Add new added points' nearby points to the to-do list
     findNearByPointsIndex(maxIndex, ROW, COLUMN)
       .filter(pointIndex => !resultMap.get(pointIndex))
-      .forEach(index => toProcess.add(index));
+      .forEach(index => toProcessPointIndexes.add(index));
 
     if (maxIndex === flattenNetwork.length - 1) {
       return maxQuality;
