@@ -61,7 +61,97 @@ module.exports = {
         trackingId: `UA-164325708-1`,
       },
     },
-    `gatsby-plugin-feed`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {},
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({
+              query: { site, allMarkdownRemark, allWordpressPost },
+            }) => {
+              const markdownNodes = allMarkdownRemark.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.frontmatter.description,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  custom_elements: [{ 'content:encoded': edge.node.html }],
+                });
+              });
+
+              const wpNodes = allWordpressPost.edges.map(edge => {
+                return {
+                  description: edge.node.excerpt,
+                  date: edge.node.date,
+                  url: site.siteMetadata.siteUrl + edge.node.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.slug,
+                  custom_elements: [{ 'content:encoded': edge.node.content }],
+                };
+              });
+
+              return [...markdownNodes, ...wpNodes];
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  edges {
+                    node {
+                      html
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                        description
+                      }
+                    }
+                  }
+                }
+                allWordpressPost(sort: {order: DESC, fields: date}) {
+                  edges {
+                    node {
+                      date
+                      excerpt
+                      title
+                      slug
+                      content
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: "Moonface's Wonderland RSS Feed",
+            // optional configuration to insert feed reference in pages:
+            // if `string` is used, it will be used to create RegExp and then test if pathname of
+            // current page satisfied this regular expression;
+            // if not provided or `undefined`, all pages will have feed reference inserted
+            // match: '^/blog/',
+            // optional configuration to specify external rss feed, such as feedburner
+            // link: 'https://feeds.feedburner.com/gatsby/blog',
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
