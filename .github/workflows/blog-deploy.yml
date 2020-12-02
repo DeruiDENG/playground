@@ -29,10 +29,11 @@ jobs:
     - name: Build artifact
       run: yarn workspace blog build
 
-    - uses: amondnet/now-deployment@v2
+    - name: Vercel Action
+      uses: amondnet/vercel-action@v19
       with:
-        zeit-token: ${{ secrets.ZEIT_TOKEN }} # Required
-        now-org-id: ${{ secrets.ZEIT_ORG_ID}}  #Required
-        now-project-id: ${{ secrets.ZEIT_PROJECT_ID}} #Required 
+        vercel-token: ${{ secrets.ZEIT_TOKEN }} # Required
+        vercel-org-id: ${{ secrets.ZEIT_ORG_ID}}  #Required
+        vercel-project-id: ${{ secrets.ZEIT_PROJECT_ID}} #Required 
         working-directory: ./
         now-args: '--prod'
