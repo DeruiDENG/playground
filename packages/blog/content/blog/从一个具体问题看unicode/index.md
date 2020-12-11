@@ -101,7 +101,13 @@ unicode是一个标准，它定义了一个非常大的字符集，包含了这�
 
 我们注意到UTF-32编码的输出中有大量冗余的0，而实际上最常用的字符通常都在U+0000~U+FFFF这个区间里，因此，UTF-32会有比较大的空间浪费。
 
+## Unicode in JavaScript
+JavaScript is using UTF-x?
 
+String.prototype.charCodeAt()
+String.fromCharCode()
+"\u0036"
+"\u{xxxx}"
 
 
 ## 参考阅读
