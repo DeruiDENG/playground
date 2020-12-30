@@ -36,4 +36,4 @@ jobs:
         vercel-org-id: ${{ secrets.ZEIT_ORG_ID}}  #Required
         vercel-project-id: ${{ secrets.ZEIT_PROJECT_ID}} #Required 
         working-directory: ./
-        now-args: '--prod'
+        vercel-args: '--prod'
