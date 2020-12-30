@@ -68,6 +68,8 @@ Tips：
 * 17:35 Website performance
 * 17:52 General guidelines: Don't make users hunt, keep it focused, minimize complexity, incentives sign in, allow email or phone, make password reset easy, link to terms and policies, keep branding and style consistent
 
+写在最后，其实作者的这篇博客比我写得更好...
+https://web.dev/sign-in-form-best-practices/
 
 
 Happy Coding 😊
