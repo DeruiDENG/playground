@@ -65,7 +65,7 @@ description: "也许Media Query是一个看起来很简单的task, 在CSS代码�
 
 但是如果你足够细心，会发现这并不是IphoneX的真实屏幕分辨率，它的分辨率高达1125*2436 pixels
 
-![image-20210708233625363](.\image-20210708233625363.png)
+![image-20210708233625363](./image-20210708233625363.png)
 
 
 
@@ -105,7 +105,7 @@ IphoneX显然应该使用与它尺寸类似的Iphone 6相同的响应式设计�
 
 
 
-一切似乎到此为止了，我本着认真负责的精神，基于Iphone X 375\*812的尺寸，计算了下它的对角线长度
+一切似乎到此为止了，我本着认真负责的精神，基于IPhone X 375\*812的尺寸，计算了下它的对角线长度
 
 ```javascript
 export function playground() {
@@ -120,3 +120,75 @@ export function playground() {
 ```
 
 发现得到的结果完全不对，怎么算出来的对角线长度成了9.32inch，与标称的5.8英寸屏幕相差甚远。
+如果长宽各除以一个1.6, 结果与预期差不多
+
+```javascript
+export function playground() {
+  const screenSize = 5.8; // 5.8英寸，屏幕的物理尺寸（对角线长度）
+  const width = 375 / 1.6; // 宽度
+  const height = 812 / 1.6; // 高度
+  const diagonal = Math.sqrt(
+    Math.pow(width / 96, 2) + Math.pow(height / 96, 2)
+  );
+  console.log(screenSize, diagonal); //  5.8 5.822980867872443
+}
+```
+
+
+
+于是进一步的学习了标准。
+
+绝对距离单位，例如cm, inch, mm, 虽然可以被物理测量，且存在相互间换算关系，但是在屏幕，纸张（打印）等不同介质中，含义是不同的。举个例子，屏幕的1cm跟纸张的1cm，基本上不是一个东西。
+
+理解这个，需要再了解几个概念
+
+### 几个概念
+
+#### Anchor
+
+在浏览器创建CSSDOM过程中，需要计算computted value（比如将width: 100%处理成实际的长度，或者处理优先级以确定apply到一个元素上的最终css property）。
+
+在计算computed value的过程中，会围绕着某一种距离单位进行
+
+对于纸张等介质，anchor会围绕着物理单位进行，比如会把所有的数值都换算成inch。
+
+但对于屏幕介质，anchor会围绕着reference pixel进行，即将px换算成reference pixel。
+
+
+
+#### Reference pixel
+
+Reference pixel是一个角度单位。
+Reference pixel/Viewport pixel/CSS pixel是同一个东西。
+1px = 1/96 inch，这也是对的，但是这里的inch也是CSS的inch，并不一定代表`物理的1/96 inch`。
+
+> The reference pixel is *the visual angle* of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm’s length. 
+
+这个官方的定义听起来有一些拗口，总结一下就是reference pixel是一个角度，它是一个常量。
+
+设备的距离不同，reference pixel代表的大小也就不同:
+
+![image-20210709165558898](image-20210709165558898.png)
+
+## 最终的答案
+
+* px是一个`角度`单位
+* 每一个屏幕媒介的视距不同，角度不同，因此视角也不同
+* 视角决定屏幕的px/reference pixel是多少
+
+
+总结一下，为什么pixel是一个角度，而不是物理长度，这是因为角度更能反应`一个物体对于观者有多大`这一个事实（透视原理）。
+27寸显示器与6寸手机屏幕的观看距离是类似的，但显示器更大，这也就是为什么显示器的宽度pixel值更大。
+使用pixel，我就不需要关心一个元素在不同的屏幕上显示的物理尺寸问题了。将一段文字设置为16px的font-size，那这些文字在观者看来，在所有不同屏幕媒介上的观者大小应该是差不多的。
+
+# 总结
+
+
+* 最后总结一下，px其实是一个角度尺寸。
+* px与屏幕的像素不是一个概念。
+* px的定义跟介质类型有关。
+* inch也不一定代表物理上的一英寸
+
+* 一个屏幕离使用者的距离越远，px代表的物理尺寸越大
+* 多数情况设计者不需要考虑px代表的物理大小，而只需要考虑他的“可视角度大小”。
+
