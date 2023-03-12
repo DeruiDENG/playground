@@ -1,15 +1,15 @@
 # This is a basic workflow to help you get started with Actions
 
-name: deploy-blog
+name: deploy-blogs
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
     branches: [ master ]
-#    paths: 
-#      - packages/blog/**.*
-#      - .github/workflows/blog-deploy.yml
+#    paths:
+#      - packages/blogs/**.*
+#      - .github/workflows/blogs-deploy.yml
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,13 +27,13 @@ jobs:
     - name: Install NPM packages
       run: yarn
     - name: Build artifact
-      run: yarn workspace blog build
+      run: yarn workspace blogs build
 
     - name: Vercel Action
       uses: amondnet/vercel-action@v19
       with:
         vercel-token: ${{ secrets.ZEIT_TOKEN }} # Required
         vercel-org-id: ${{ secrets.ZEIT_ORG_ID}}  #Required
-        vercel-project-id: ${{ secrets.ZEIT_PROJECT_ID}} #Required 
+        vercel-project-id: ${{ secrets.ZEIT_PROJECT_ID}} #Required
         working-directory: ./
         vercel-args: '--prod'

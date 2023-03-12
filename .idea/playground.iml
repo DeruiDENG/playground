@@ -5,7 +5,6 @@
       <sourceFolder url="file://$MODULE_DIR$/__tests__" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/packages/blog/.cache" />
-      <excludeFolder url="file://$MODULE_DIR$/packages/blog/public" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
     </content>
