@@ -30,7 +30,7 @@ jobs:
       run: yarn workspace blogs build
 
     - name: Vercel Action
-      uses: amondnet/vercel-action@v19
+      uses: amondnet/vercel-action@v25
       with:
         vercel-token: ${{ secrets.ZEIT_TOKEN }} # Required
         vercel-org-id: ${{ secrets.ZEIT_ORG_ID}}  #Required
