@@ -1,6 +1,73 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
-  ]
+    "config:recommended",
+    ":semanticCommits",
+    ":separateMultipleMajorReleases"
+  ],
+  "timezone": "Asia/Shanghai",
+  "prHourlyLimit": 2,
+  "prConcurrentLimit": 5,
+  "packageRules": [
+    {
+      "description": "Group all @types declarations into a single PR with automerge",
+      "matchPackageNames": [
+        "@types/**"
+      ],
+      "groupName": "type definitions",
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Group ESLint and Prettier toolchain packages into a single PR",
+      "matchPackageNames": [
+        "eslint",
+        "eslint-**",
+        "@eslint/**",
+        "typescript-eslint",
+        "prettier"
+      ],
+      "groupName": "linting tools"
+    },
+    {
+      "description": "Group Babel, Jest, and testing toolchain packages into a single PR",
+      "matchPackageNames": [
+        "@babel/**",
+        "jest",
+        "jest-**",
+        "babel-jest",
+        "ts-node",
+        "chai",
+        "@types/chai",
+        "@types/jest"
+      ],
+      "groupName": "test suite"
+    },
+    {
+      "description": "Automerge non-major devDependencies updates when CI passes",
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Group GitHub Actions updates into a single PR",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "groupName": "github-actions"
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 6:00 am on monday"
+    ],
+    "automerge": true
+  }
 }
