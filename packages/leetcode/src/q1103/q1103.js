@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable */
 /**
  * @param {number} candies
  * @param {number} num_people

@@ -1,5 +1,6 @@
 module.exports = {
   testEnvironment: 'node',
-  rootDir: './src',
+  roots: ['<rootDir>/src'],
   testRegex: ['.*\\.test\\.ts', '.+Tests\\.ts'],
+  transformIgnorePatterns: ['node_modules/(?!chai/)'],
 };
